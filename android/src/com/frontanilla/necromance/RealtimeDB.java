@@ -38,8 +38,10 @@ public class RealtimeDB implements RealtimeDBInterface {
                     }
                     players.add(new DBPlayer(
                             playerSnapshot.getKey(),    // Player ID
-                            Integer.parseInt(parts[0]), // X
-                            Integer.parseInt(parts[1])) // Y
+                            parts[0],                   // Name
+                            Integer.parseInt(parts[1]), // X
+                            Integer.parseInt(parts[2]), // Y
+                            parts[3])                   // Color
                     );
                 }
                 listener.onDataFetched(players);
@@ -65,7 +67,7 @@ public class RealtimeDB implements RealtimeDBInterface {
     //-----------------
     @Override
     public void addPlayer(String playerID, final OnResultListener listener) {
-        playerDataReference.child(playerID).setValue("0,0", new DatabaseReference.CompletionListener() {
+        playerDataReference.child(playerID).setValue("Bob,0,0,R", new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 if (databaseError != null) {

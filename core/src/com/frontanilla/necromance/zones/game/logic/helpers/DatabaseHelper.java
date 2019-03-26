@@ -8,6 +8,7 @@ import com.frontanilla.necromance.zones.game.GameAssets;
 import com.frontanilla.necromance.zones.game.GameFirebase;
 import com.frontanilla.necromance.zones.game.GameInput;
 import com.frontanilla.necromance.zones.game.GameStuff;
+import com.frontanilla.necromance.zones.game.logic.GameLogic;
 
 public class DatabaseHelper {
 
@@ -15,14 +16,17 @@ public class DatabaseHelper {
     private GameAssets gameAssets;
     private GameFirebase gameFirebase;
     private GameInput gameInput;
+    private GameLogic gameLogic;
     private GameStuff gameStuff;
     // Logic
     private boolean initialPlayersFetched;
 
-    public void initializeStructure(GameAssets gameAssets, GameFirebase gameFirebase, GameInput gameInput, GameStuff gameStuff) {
+    public void initializeStructure(GameAssets gameAssets, GameFirebase gameFirebase, GameInput gameInput, GameLogic gameLogic,
+                                    GameStuff gameStuff) {
         this.gameAssets = gameAssets;
         this.gameFirebase = gameFirebase;
         this.gameInput = gameInput;
+        this.gameLogic = gameLogic;
         this.gameStuff = gameStuff;
     }
 
@@ -39,16 +43,17 @@ public class DatabaseHelper {
             initialPlayersFetched = true;
         }
         // To Track if This Player is in the Database
-        boolean inGame = false;
+        Human thisPlayer = null;
+        String thisPlayerID = NecromanceClient.instance.getPhoneID();
         // Add or Update Fetched Players
         DB:
         for (int i = 0; i < databasePlayers.size; i++) {
             String databasePlayerID = databasePlayers.get(i).getPlayerID();
-            if (databasePlayerID.equals(NecromanceClient.instance.getPhoneID())) {
-                inGame = true;
-            }
             for (int j = 0; j < gameStuff.getHumanPlayers().size; j++) {
                 String existentPlayerID = gameStuff.getHumanPlayers().get(j).getDatabasePlayer().getPlayerID();
+                if (existentPlayerID.equals(thisPlayerID) && databasePlayerID.equals(existentPlayerID)) {
+                    thisPlayer = gameStuff.getHumanPlayers().get(j);
+                }
                 if (existentPlayerID.equals(databasePlayerID)) {
                     continue DB;
                 }
@@ -58,9 +63,14 @@ public class DatabaseHelper {
             newHuman.setFont(gameAssets.getTimesSquare());
             gameStuff.getHumanPlayers().add(newHuman);
         }
-        // This Player is not in the Database, Add it
-        if (!inGame) {
+        if (thisPlayer == null) {
+            // This Player is not in the Database, Add it
             gameFirebase.addPlayer();
+        } else {
+            // This Player is in the Database, Restore its Color
+            if (gameLogic.getSharedLogic().isMovingPlayer()) {
+                thisPlayer.setCurrentColor(thisPlayer.getOriginalColor());
+            }
         }
     }
 }

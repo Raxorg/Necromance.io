@@ -1,6 +1,7 @@
 package com.frontanilla.necromance.zones.game.logic.helpers;
 
 import com.badlogic.gdx.graphics.Color;
+import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.zones.game.GameStuff;
 
@@ -25,7 +26,8 @@ public class LatencyHelper {
         if (movePlayerTimeStarted) {
             movePlayerTime += delta;
             if (movePlayerTime >= 1f) {
-                Find.humanWithPhoneID(gameStuff.getHumanPlayers()).setColor(Color.WHITE.cpy().lerp(Color.CLEAR, 0.5f));
+                Human thisHuman = Find.humanWithPhoneID(gameStuff.getHumanPlayers());
+                thisHuman.setCurrentColor(thisHuman.getOriginalColor().cpy().lerp(Color.CLEAR, 0.75f));
             }
         }
     }

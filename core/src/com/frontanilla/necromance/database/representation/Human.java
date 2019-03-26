@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.necromance.database.clone.DBPlayer;
 import com.frontanilla.necromance.utils.helpers.TextUtils;
+import com.frontanilla.necromance.utils.helpers.Transform;
 
 import static com.frontanilla.necromance.zones.game.GameConstants.HUMAN_SIZE;
 
@@ -19,19 +20,20 @@ public class Human {
     private TextureRegion textureRegion;
     // Additional - Rendering
     private float textWidth, textHeight;
-    private Color color;
+    private Color originalColor, currentColor;
 
     public Human(DBPlayer databasePlayer) {
         this.databasePlayer = databasePlayer;
-        color = Color.WHITE;
+        originalColor = Transform.stringToColor(databasePlayer.getColor());
+        currentColor = Transform.stringToColor(databasePlayer.getColor());
     }
 
     public void render(SpriteBatch spriteBatch) {
         font.setColor(Color.BLACK);
         float fontX = databasePlayer.getX() + HUMAN_SIZE / 2f - textWidth / 2f;
         float fontY = databasePlayer.getY() + HUMAN_SIZE + textHeight + textHeight / 3f;
-        font.draw(spriteBatch, databasePlayer.getPlayerID(), fontX, fontY);
-        spriteBatch.setColor(color);
+        font.draw(spriteBatch, databasePlayer.getName(), fontX, fontY);
+        spriteBatch.setColor(currentColor);
         //spriteBatch.draw(textureRegion, databasePlayer.getX(), databasePlayer.getY(), HUMAN_SIZE, HUMAN_SIZE);
         spriteBatch.draw(textureRegion, databasePlayer.getX(), databasePlayer.getY(), HUMAN_SIZE, HUMAN_SIZE);
     }
@@ -47,19 +49,23 @@ public class Human {
 
     public void setFont(BitmapFont font) {
         this.font = font;
-        textWidth = TextUtils.getTextWidth(databasePlayer.getPlayerID(), font);
-        textHeight = TextUtils.getTextHeight(databasePlayer.getPlayerID(), font);
+        textWidth = TextUtils.getTextWidth(databasePlayer.getName(), font);
+        textHeight = TextUtils.getTextHeight(databasePlayer.getName(), font);
     }
 
     public void setTextureRegion(TextureRegion textureRegion) {
         this.textureRegion = textureRegion;
     }
 
-    public Color getColor() {
-        return color;
+    public Color getCurrentColor() {
+        return currentColor;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setCurrentColor(Color color) {
+        currentColor = color;
+    }
+
+    public Color getOriginalColor() {
+        return originalColor;
     }
 }

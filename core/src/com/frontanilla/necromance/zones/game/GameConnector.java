@@ -12,7 +12,7 @@ public class GameConnector extends ZoneConnector {
         firebase = new GameFirebase(sharedConnector.getSharedFirebase());
         initializer = new GameInitializer(this);
         input = new GameInput();
-        logic = new GameLogic();
+        logic = new GameLogic(sharedConnector.getSharedLogic());
         renderer = new GameRenderer();
         screen = new GameScreen(this);
         stuff = new GameStuff(sharedConnector.getSharedStuff());

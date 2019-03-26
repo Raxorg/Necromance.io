@@ -9,9 +9,12 @@ import com.frontanilla.necromance.utils.advanced.TimerListener;
 
 public class SharedFirebase {
 
+    // Structure
+    private SharedLogic sharedLogic;
     private SharedStuff sharedStuff;
 
-    public void initializeStructure(SharedStuff sharedStuff) {
+    public void initializeStructure(SharedLogic sharedLogic, SharedStuff sharedStuff) {
+        this.sharedLogic = sharedLogic;
         this.sharedStuff = sharedStuff;
     }
 
@@ -45,8 +48,21 @@ public class SharedFirebase {
         NecromanceClient.instance.getRealtimeDBInterface().addPlayer(NecromanceClient.instance.getPhoneID(), listener);
     }
 
-    public void movePlayer(int x, int y, OnResultListener onResultListener, TimerListener timerListener) {
-        String phoneID = NecromanceClient.instance.getPhoneID();
-        NecromanceClient.instance.getRealtimeDBInterface().movePlayer(phoneID, x, y, onResultListener, timerListener);
+    public void movePlayer(int x, int y, final OnResultListener onResultListener, final TimerListener timerListener) {
+        if (!sharedLogic.isMovingPlayer()) {
+            sharedLogic.setMovingPlayer(true);
+            timerListener.startTime();
+            String phoneID = NecromanceClient.instance.getPhoneID();
+            NecromanceClient.instance.getRealtimeDBInterface().movePlayer(phoneID, x, y, new OnResultListener() {
+                @Override
+                public void onResult(boolean success) {
+                    sharedLogic.setMovingPlayer(false);
+                    timerListener.stopTime();
+                    onResultListener.onResult(success);
+                }
+            });
+        } else {
+            System.out.println("THE PLAYER IS BEING MOVED, PLEASE WAIT");
+        }
     }
 }

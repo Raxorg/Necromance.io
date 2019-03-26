@@ -4,7 +4,7 @@ import com.frontanilla.necromance.zones.shared.SharedConnector;
 
 public abstract class ZoneConnector {
 
-    private SharedConnector sharedConnector;
+    protected SharedConnector sharedConnector;
     protected ZoneAssets assets;
     protected ZoneFirebase firebase;
     protected ZoneInitializer initializer;

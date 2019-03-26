@@ -7,22 +7,17 @@ import com.frontanilla.necromance.database.clone.DBPlayer;
 import com.frontanilla.necromance.interfacing.firebase.RealtimeDBInterface;
 import com.frontanilla.necromance.utils.advanced.OnResultListener;
 import com.frontanilla.necromance.utils.advanced.RealtimeChangeListener;
-import com.frontanilla.necromance.utils.advanced.TimerListener;
 import com.google.firebase.database.*;
 
 public class RealtimeDB implements RealtimeDBInterface {
 
     private DatabaseReference playerDataReference;
     private ValueEventListener playerDataEventListener;
-    // Logic TODO: TEST
-    private boolean movingPlayer;
 
     RealtimeDB() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.setPersistenceEnabled(false);
         playerDataReference = database.getReference("playerData");
-        // Logic TODO: TEST
-        movingPlayer = false;
     }
 
     //-------------------
@@ -86,25 +81,16 @@ public class RealtimeDB implements RealtimeDBInterface {
     // Player Moving
     //---------------
     @Override
-    public void movePlayer(String phoneID, int x, int y, final OnResultListener onResultListener,
-                           final TimerListener timerListener) {
-        if (!movingPlayer) {
-            movingPlayer = true;
-            timerListener.startTime();
-            playerDataReference.child(phoneID).setValue(x + "," + y, new DatabaseReference.CompletionListener() {
-                @Override
-                public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                    if (databaseError != null) {
-                        onResultListener.onResult(false);
-                    } else {
-                        onResultListener.onResult(true);
-                    }
-                    movingPlayer = false;
-                    timerListener.stopTime();
+    public void movePlayer(String phoneID, int x, int y, final OnResultListener onResultListener) {
+        playerDataReference.child(phoneID).setValue(x + "," + y, new DatabaseReference.CompletionListener() {
+            @Override
+            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                if (databaseError != null) {
+                    onResultListener.onResult(false);
+                } else {
+                    onResultListener.onResult(true);
                 }
-            });
-        } else {
-            System.out.println("THE PLAYER IS BEING MOVED, PLEASE WAIT");
-        }
+            }
+        });
     }
 }

@@ -9,7 +9,7 @@ public class SplashConnector extends ZoneConnector {
         super(new SharedConnector());
         assets = new SplashAssets();
         initializer = new SplashInitializer(this);
-        logic = new SplashLogic();
+        logic = new SplashLogic(sharedConnector.getSharedLogic());
         renderer = new SplashRenderer();
         screen = new SplashScreen(this);
     }

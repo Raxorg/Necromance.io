@@ -4,7 +4,6 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.clone.DBPlayer;
 import com.frontanilla.necromance.utils.advanced.OnResultListener;
 import com.frontanilla.necromance.utils.advanced.RealtimeChangeListener;
-import com.frontanilla.necromance.utils.advanced.TimerListener;
 
 public interface RealtimeDBInterface {
 
@@ -14,5 +13,5 @@ public interface RealtimeDBInterface {
 
     void addPlayer(String playerID, OnResultListener listener);
 
-    void movePlayer(String phoneID, int x, int y, OnResultListener onResultListener, TimerListener timerListener);
+    void movePlayer(String phoneID, int x, int y, OnResultListener onResultListener);
 }

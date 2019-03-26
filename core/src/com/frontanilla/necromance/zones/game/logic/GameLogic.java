@@ -7,6 +7,7 @@ import com.frontanilla.necromance.zones.foundations.ZoneLogic;
 import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHelper;
+import com.frontanilla.necromance.zones.shared.SharedLogic;
 
 public class GameLogic extends ZoneLogic {
 
@@ -14,6 +15,10 @@ public class GameLogic extends ZoneLogic {
     private DatabaseHelper databaseHelper;
     private LatencyHelper latencyHelper;
     private ProcessedInputHelper processedInputHelper;
+
+    public GameLogic(SharedLogic sharedLogic) {
+        super(sharedLogic);
+    }
 
     public void initializeStructure(DatabaseHelper databaseHelper, LatencyHelper latencyHelper,
                                     ProcessedInputHelper processedInputHelper) {

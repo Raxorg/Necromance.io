@@ -3,6 +3,7 @@ package com.frontanilla.necromance.zones.splash;
 import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.zones.foundations.ZoneLogic;
 import com.frontanilla.necromance.zones.game.GameConnector;
+import com.frontanilla.necromance.zones.shared.SharedLogic;
 
 public class SplashLogic extends ZoneLogic {
 
@@ -11,6 +12,10 @@ public class SplashLogic extends ZoneLogic {
     private SplashAssets splashAssets;
     // Logic
     private boolean gameAssetsQueued;
+
+    public SplashLogic(SharedLogic sharedLogic) {
+        super(sharedLogic);
+    }
 
     public void initializeStructure(SplashConnector splashConnector, SplashAssets splashAssets) {
         this.splashConnector = splashConnector;

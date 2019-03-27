@@ -27,6 +27,7 @@ public class GameAssets extends ZoneAssets {
     public void instantiateAssets() {
         timesSquare = assetManager.get(TIMES_SQUARE_FILE, BitmapFont.class);
         Texture gameAtlas = assetManager.get(GAME_ATLAS_FILE, Texture.class);
+        gameAtlas.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         human = new TextureRegion(gameAtlas, 1024, 0, 200, 200);
         playArea = new TextureRegion(gameAtlas, 0, 0, 1024, 1024);
         frozenNinePatch = new TextureRegion(gameAtlas, 1024, 200, 64, 64);

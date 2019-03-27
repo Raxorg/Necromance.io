@@ -119,4 +119,22 @@ public class SharedFirebase {
             System.out.println("THE PLAYER NAME IS BEING CHANGED, PLEASE WAIT");
         }
     }
+
+    public void changePlayerNameAndColor(String chosenName, String chosenColor) {
+        if (!sharedLogic.isChangingName() && !sharedLogic.isChangingColor()) {
+            sharedLogic.setChangingName(true);
+            sharedLogic.setChangingColor(true);
+            DBPlayer thisPlayer = Find.databasePlayerWithPhoneID(sharedStuff.getDatabaseClone().getPlayers());
+            NecromanceClient.instance.getRealtimeDBInterface().changePlayerNameAndColor(thisPlayer, chosenName, chosenColor,
+                    new OnResultListener() {
+                        @Override
+                        public void onResult(boolean success) {
+                            sharedLogic.setChangingName(false);
+                            sharedLogic.setChangingColor(false);
+                        }
+                    });
+        } else {
+            System.out.println("THE PLAYER NAME OR COLOR IS BEING CHANGED, PLEASE WAIT");
+        }
+    }
 }

@@ -2,8 +2,8 @@ package com.frontanilla.necromance.zones.game;
 
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.clone.DBPlayer;
-import com.frontanilla.necromance.utils.advanced.OnResultListener;
 import com.frontanilla.necromance.utils.advanced.ChangeListener;
+import com.frontanilla.necromance.utils.advanced.OnResultListener;
 import com.frontanilla.necromance.utils.advanced.TimerListener;
 import com.frontanilla.necromance.zones.foundations.ZoneFirebase;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
@@ -78,5 +78,9 @@ public class GameFirebase extends ZoneFirebase {
 
     public void changePlayerColor(String chosenColor) {
         sharedFirebase.changePlayerColor(chosenColor);
+    }
+
+    public void changePlayerNameAndColor(String chosenName, String chosenColor) {
+        sharedFirebase.changePlayerNameAndColor(chosenName, chosenColor);
     }
 }

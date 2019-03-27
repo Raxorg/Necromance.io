@@ -28,7 +28,7 @@ public class RealtimeDB implements RealtimeDBInterface {
     // Version
     @Override
     public void fetchVersionInRealtime(final ChangeListener<String> listener) {
-        versionReference.addListenerForSingleValueEvent(new ValueEventListener() {
+        versionReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listener.onDataFetched(dataSnapshot.getValue(String.class));
@@ -131,6 +131,16 @@ public class RealtimeDB implements RealtimeDBInterface {
     @Override
     public void changePlayerColor(DBPlayer thisPlayer, String chosenColor, OnResultListener onResultListener) {
         String newReferenceValue = thisPlayer.getName() + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + chosenColor;
+        setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
+    }
+
+    //--------------------------------
+    // Player Name And Color Changing
+    //--------------------------------
+    @Override
+    public void changePlayerNameAndColor(DBPlayer thisPlayer, String chosenName, String chosenColor,
+                                         OnResultListener onResultListener) {
+        String newReferenceValue = chosenName + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + chosenColor;
         setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
     }
 }

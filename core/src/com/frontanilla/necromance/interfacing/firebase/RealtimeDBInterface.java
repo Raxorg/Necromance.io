@@ -20,4 +20,6 @@ public interface RealtimeDBInterface {
     void changePlayerName(DBPlayer thisPlayer, String chosenName, OnResultListener onResultListener);
 
     void changePlayerColor(DBPlayer thisPlayer, String chosenColor, OnResultListener onResultListener);
+
+    void changePlayerNameAndColor(DBPlayer thisPlayer, String chosenName, String chosenColor, OnResultListener onResultListener);
 }

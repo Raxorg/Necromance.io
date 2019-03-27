@@ -7,8 +7,8 @@ import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.zones.game.GameAssets;
 import com.frontanilla.necromance.zones.game.GameFirebase;
 import com.frontanilla.necromance.zones.game.GameInput;
-import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
+import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class DatabaseHelper {
 
@@ -52,9 +52,8 @@ public class DatabaseHelper {
                     continue DB;
                 }
             }
-            Human newHuman = new Human(databasePlayers.get(i));
+            Human newHuman = new Human(databasePlayers.get(i), gameAssets.getFrozenNinePatch(), gameAssets.getTimesSquare());
             newHuman.setTextureRegion(gameAssets.getHuman());
-            newHuman.setFont(gameAssets.getTimesSquare());
             gameStuff.getHumanPlayers().add(newHuman);
         }
         // Add to Database or Restore Color of This Player

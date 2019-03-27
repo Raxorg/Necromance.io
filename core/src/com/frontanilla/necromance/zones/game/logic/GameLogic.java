@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.clone.DBPlayer;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneLogic;
+import com.frontanilla.necromance.zones.game.logic.helpers.CameraHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHelper;
@@ -12,6 +13,7 @@ import com.frontanilla.necromance.zones.shared.SharedLogic;
 public class GameLogic extends ZoneLogic {
 
     // Structure
+    private CameraHelper cameraHelper;
     private DatabaseHelper databaseHelper;
     private LatencyHelper latencyHelper;
     private ProcessedInputHelper processedInputHelper;
@@ -20,8 +22,9 @@ public class GameLogic extends ZoneLogic {
         super(sharedLogic);
     }
 
-    public void initializeStructure(DatabaseHelper databaseHelper, LatencyHelper latencyHelper,
+    public void initializeStructure(CameraHelper cameraHelper, DatabaseHelper databaseHelper, LatencyHelper latencyHelper,
                                     ProcessedInputHelper processedInputHelper) {
+        this.cameraHelper = cameraHelper;
         this.databaseHelper = databaseHelper;
         this.latencyHelper = latencyHelper;
         this.processedInputHelper = processedInputHelper;
@@ -29,6 +32,7 @@ public class GameLogic extends ZoneLogic {
 
     @Override
     public void initState() {
+        cameraHelper.initState();
         databaseHelper.initState();
         latencyHelper.initState();
         processedInputHelper.initState();

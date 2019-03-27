@@ -4,6 +4,7 @@ import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.foundations.ZoneInitializer;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
+import com.frontanilla.necromance.zones.game.logic.helpers.CameraHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHelper;
@@ -28,6 +29,7 @@ public class GameInitializer extends ZoneInitializer {
         GameStuff gameStuff = (GameStuff) connector.getStuff();
         // Structure Instantiation
         //-------------------------
+        CameraHelper cameraHelper = new CameraHelper();
         DatabaseHelper databaseHelper = new DatabaseHelper();
         LatencyHelper latencyHelper = new LatencyHelper();
         ProcessedInputHelper processedInputHelper = new ProcessedInputHelper();
@@ -38,13 +40,16 @@ public class GameInitializer extends ZoneInitializer {
         // Input
         gameInput.initializeStructure(gameLogic, gameScreen, gameStuff);
         // Logic
+        cameraHelper.initializeStructure(gameScreen, gameStuff);
         databaseHelper.initializeStructure(gameAssets, gameFirebase, gameInput, gameLogic, gameStuff);
         latencyHelper.initializeStructure(gameStuff);
         processedInputHelper.initializeStructure(gameFirebase, gameStuff);
 
-        gameLogic.initializeStructure(databaseHelper, latencyHelper, processedInputHelper);
+        gameLogic.initializeStructure(cameraHelper, databaseHelper, latencyHelper, processedInputHelper);
         // Renderer
         gameRenderer.initializeStructure(gameScreen, gameStuff);
+        // Stuff
+        gameStuff.initializeStructure(gameAssets);
         // Mandatory Initialization
         //--------------------------
         gameScreen.initCameras();

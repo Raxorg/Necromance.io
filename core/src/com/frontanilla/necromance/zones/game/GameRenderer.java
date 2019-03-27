@@ -27,12 +27,13 @@ public class GameRenderer extends ZoneRenderer {
     @Override
     public void render() {
         // Clear Previous Frame
-        Gdx.gl.glClearColor(1, 1, 1, 1);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         // Use the Camera
         spriteBatch.setProjectionMatrix(gameScreen.getStaticCamera().combined);
         // Render Stuff
         spriteBatch.begin();
+        gameStuff.getPlayArea().render(spriteBatch);
         for (int i = 0; i < gameStuff.getHumanPlayers().size; i++) {
             gameStuff.getHumanPlayers().get(i).render(spriteBatch);
         }

@@ -6,38 +6,37 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.necromance.database.clone.DBPlayer;
-import com.frontanilla.necromance.utils.helpers.TextUtils;
+import com.frontanilla.necromance.database.subscribers.DBPlayerSubscriber;
 import com.frontanilla.necromance.utils.helpers.Transform;
+import com.frontanilla.necromance.zones.game.stuff.NameBox;
 
 import static com.frontanilla.necromance.zones.game.GameConstants.HUMAN_SIZE;
 
-public class Human {
+public class Human extends DBPlayerSubscriber {
 
-    // Database Object that This Class Represents
     private DBPlayer databasePlayer;
     // Additional - Components
-    private BitmapFont font;
+    private NameBox nameBox;
     private TextureRegion textureRegion;
     // Additional - Rendering
-    private float textHeight;
+    private Color color;
     private boolean useOriginalColor;
 
-    public Human(DBPlayer databasePlayer) {
+    public Human(DBPlayer databasePlayer, TextureRegion nameBoxNinePatch, BitmapFont nameBoxBitmapFont) {
         this.databasePlayer = databasePlayer;
+        databasePlayer.setDbPlayerSubscriber(this);
         useOriginalColor = true;
+        // Name Box
+        nameBox = new NameBox(nameBoxNinePatch, nameBoxBitmapFont);
+        onUpdate(databasePlayer);
     }
 
     public void render(SpriteBatch spriteBatch) {
-        font.setColor(Color.BLACK);
-        float textWidth = TextUtils.getTextWidth(databasePlayer.getName(), font);
-        float fontX = databasePlayer.getX() + HUMAN_SIZE / 2f - textWidth / 2f;
-        float fontY = databasePlayer.getY() + HUMAN_SIZE + textHeight + textHeight / 3f;
-        font.draw(spriteBatch, databasePlayer.getName(), fontX, fontY);
-        Color databasePlayerColor = Transform.stringToColor(databasePlayer.getColor());
+        nameBox.render(spriteBatch);
         if (useOriginalColor) {
-            spriteBatch.setColor(databasePlayerColor);
+            spriteBatch.setColor(color);
         } else {
-            spriteBatch.setColor(databasePlayerColor.cpy().lerp(Color.BLACK, 0.5f));
+            spriteBatch.setColor(color.cpy().lerp(Color.BLACK, 0.5f));
         }
         spriteBatch.draw(textureRegion, databasePlayer.getX(), databasePlayer.getY(), HUMAN_SIZE, HUMAN_SIZE);
     }
@@ -51,16 +50,23 @@ public class Human {
         return databasePlayer;
     }
 
-    public void setFont(BitmapFont font) {
-        this.font = font;
-        textHeight = TextUtils.getTextHeight(databasePlayer.getName(), font);
-    }
-
     public void setTextureRegion(TextureRegion textureRegion) {
         this.textureRegion = textureRegion;
     }
 
     public void setUseOriginalColor(boolean useOriginalColor) {
         this.useOriginalColor = useOriginalColor;
+    }
+
+    @Override
+    public void onUpdate(DBPlayer databasePlayer) {
+        // Name Box
+        nameBox.setText(databasePlayer.getName());
+        float nameBoxX = databasePlayer.getX() + HUMAN_SIZE / 2f - nameBox.getWidth() / 2f;
+        float nameBoxY = databasePlayer.getY() + HUMAN_SIZE + nameBox.getTextHeight() / 3f;
+        nameBox.setPosition(nameBoxX, nameBoxY);
+        nameBox.setColor(Transform.stringToColor(databasePlayer.getColor()));
+        // Character
+        color = Transform.stringToColor(databasePlayer.getColor());
     }
 }

@@ -13,6 +13,8 @@ public class GameAssets extends ZoneAssets {
 
     private BitmapFont timesSquare;
     private TextureRegion human;
+    private TextureRegion playArea;
+    private TextureRegion frozenNinePatch;
 
     @Override
     public void queueAssetLoading() {
@@ -25,7 +27,9 @@ public class GameAssets extends ZoneAssets {
     public void instantiateAssets() {
         timesSquare = assetManager.get(TIMES_SQUARE_FILE, BitmapFont.class);
         Texture gameAtlas = assetManager.get(GAME_ATLAS_FILE, Texture.class);
-        human = new TextureRegion(gameAtlas, 0, 0, 200, 200);
+        human = new TextureRegion(gameAtlas, 1024, 0, 200, 200);
+        playArea = new TextureRegion(gameAtlas, 0, 0, 1024, 1024);
+        frozenNinePatch = new TextureRegion(gameAtlas, 1024, 200, 64, 64);
     }
 
     public BitmapFont getTimesSquare() {
@@ -34,5 +38,13 @@ public class GameAssets extends ZoneAssets {
 
     public TextureRegion getHuman() {
         return human;
+    }
+
+    public TextureRegion getPlayArea() {
+        return playArea;
+    }
+
+    public TextureRegion getFrozenNinePatch() {
+        return frozenNinePatch;
     }
 }

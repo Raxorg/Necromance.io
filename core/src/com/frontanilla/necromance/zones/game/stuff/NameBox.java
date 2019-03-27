@@ -26,7 +26,7 @@ public class NameBox {
         // Box
         textHeight = TextUtils.getTextHeight(ALPHABET, font);
         margin = textHeight * 0.3f;
-        bounds = new Rectangle(0, 0, 0, textHeight + 2 * margin);
+        bounds = new Rectangle(0, 0, 0, textHeight + 3 * margin);
         topLeft = new TextureRegion(ninePatch, 0, 0, 12, 10);
         top = new TextureRegion(ninePatch, 12, 0, 42, 10);
         topRight = new TextureRegion(ninePatch, 54, 0, 10, 10);

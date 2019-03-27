@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
+import com.frontanilla.necromance.utils.helpers.Validate;
 import com.frontanilla.necromance.zones.game.GameFirebase;
 import com.frontanilla.necromance.zones.game.GameStuff;
 
@@ -32,6 +33,12 @@ public class ProcessedInputHelper {
                 @Override
                 public void input(String userText) {
                     String chosenName = userText.substring(0, Math.min(userText.length(), 10));
+                    String[] parts = chosenName.split(",");
+                    if (parts.length > 1) {
+                        if (Validate.colorString(parts[1])) {
+                            gameFirebase.changePlayerColor(parts[1]);
+                        }
+                    }
                     gameFirebase.changePlayerName(chosenName);
                 }
 

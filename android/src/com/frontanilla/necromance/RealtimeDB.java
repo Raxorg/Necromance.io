@@ -105,4 +105,13 @@ public class RealtimeDB implements RealtimeDBInterface {
         String newReferenceValue = chosenName + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + thisPlayer.getColor();
         setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
     }
+
+    //-----------------------
+    // Player Color Changing
+    //-----------------------
+    @Override
+    public void changePlayerColor(DBPlayer thisPlayer, String chosenColor, OnResultListener onResultListener) {
+        String newReferenceValue = thisPlayer.getName() + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + chosenColor;
+        setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
+    }
 }

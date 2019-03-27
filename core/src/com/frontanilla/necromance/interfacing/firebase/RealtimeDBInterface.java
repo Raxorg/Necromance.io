@@ -11,9 +11,11 @@ public interface RealtimeDBInterface {
 
     void stopFetchingPlayerDataInRealtime();
 
-    void addPlayer(String playerID, OnResultListener listener);
+    void addPlayer(String playerID, OnResultListener onResultListener);
 
     void movePlayer(DBPlayer thisPlayer, int x, int y, OnResultListener onResultListener);
 
-    void changePlayerName(DBPlayer thisPlayer, String chosenName, OnResultListener listener);
+    void changePlayerName(DBPlayer thisPlayer, String chosenName, OnResultListener onResultListener);
+
+    void changePlayerColor(DBPlayer thisPlayer, String chosenColor, OnResultListener onResultListener);
 }

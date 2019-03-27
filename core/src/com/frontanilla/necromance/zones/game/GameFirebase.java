@@ -75,4 +75,8 @@ public class GameFirebase extends ZoneFirebase {
     public void changePlayerName(String chosenName) {
         sharedFirebase.changePlayerName(chosenName);
     }
+
+    public void changePlayerColor(String chosenColor) {
+        sharedFirebase.changePlayerColor(chosenColor);
+    }
 }

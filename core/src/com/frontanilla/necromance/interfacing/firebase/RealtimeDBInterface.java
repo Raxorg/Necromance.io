@@ -2,12 +2,14 @@ package com.frontanilla.necromance.interfacing.firebase;
 
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.clone.DBPlayer;
+import com.frontanilla.necromance.utils.advanced.ChangeListener;
 import com.frontanilla.necromance.utils.advanced.OnResultListener;
-import com.frontanilla.necromance.utils.advanced.RealtimeChangeListener;
 
 public interface RealtimeDBInterface {
 
-    void fetchPlayerDataInRealtime(RealtimeChangeListener<DelayedRemovalArray<DBPlayer>> listener);
+    void fetchVersionInRealtime(ChangeListener<String> listener);
+
+    void fetchPlayerDataInRealtime(ChangeListener<DelayedRemovalArray<DBPlayer>> listener);
 
     void stopFetchingPlayerDataInRealtime();
 

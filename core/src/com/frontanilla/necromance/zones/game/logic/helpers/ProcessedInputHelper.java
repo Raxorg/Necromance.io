@@ -36,10 +36,12 @@ public class ProcessedInputHelper {
                     String[] parts = chosenName.split(",");
                     if (parts.length > 1) {
                         if (Validate.colorString(parts[1])) {
+                            gameFirebase.changePlayerName(parts[0]);
                             gameFirebase.changePlayerColor(parts[1]);
                         }
+                    } else {
+                        gameFirebase.changePlayerName(chosenName);
                     }
-                    gameFirebase.changePlayerName(chosenName);
                 }
 
                 @Override

@@ -7,7 +7,7 @@ public class DBPlayerData {
     private DelayedRemovalArray<DBPlayer> databasePlayers;
 
     public DBPlayerData() {
-        databasePlayers = new DelayedRemovalArray<DBPlayer>();
+        databasePlayers = new DelayedRemovalArray<>();
     }
 
     public void updatePlayerData(DelayedRemovalArray<DBPlayer> databasePlayers) {

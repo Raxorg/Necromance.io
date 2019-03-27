@@ -5,26 +5,45 @@ import android.support.annotation.Nullable;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.clone.DBPlayer;
 import com.frontanilla.necromance.interfacing.firebase.RealtimeDBInterface;
+import com.frontanilla.necromance.utils.advanced.ChangeListener;
 import com.frontanilla.necromance.utils.advanced.OnResultListener;
-import com.frontanilla.necromance.utils.advanced.RealtimeChangeListener;
 import com.google.firebase.database.*;
 
 public class RealtimeDB implements RealtimeDBInterface {
 
+    private DatabaseReference versionReference;
     private DatabaseReference playerDataReference;
     private ValueEventListener playerDataEventListener;
 
     RealtimeDB() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.setPersistenceEnabled(false);
+        versionReference = database.getReference("version");
         playerDataReference = database.getReference("playerData");
     }
 
     //-------------------
     // Realtime Fetching
     //-------------------
+    // Version
     @Override
-    public void fetchPlayerDataInRealtime(final RealtimeChangeListener<DelayedRemovalArray<DBPlayer>> listener) {
+    public void fetchVersionInRealtime(final ChangeListener<String> listener) {
+        versionReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listener.onDataFetched(dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                listener.onCancelled(databaseError.getMessage());
+            }
+        });
+    }
+
+    // Players
+    @Override
+    public void fetchPlayerDataInRealtime(final ChangeListener<DelayedRemovalArray<DBPlayer>> listener) {
         playerDataEventListener = playerDataReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

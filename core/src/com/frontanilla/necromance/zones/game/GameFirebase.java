@@ -3,7 +3,7 @@ package com.frontanilla.necromance.zones.game;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.clone.DBPlayer;
 import com.frontanilla.necromance.utils.advanced.OnResultListener;
-import com.frontanilla.necromance.utils.advanced.RealtimeChangeListener;
+import com.frontanilla.necromance.utils.advanced.ChangeListener;
 import com.frontanilla.necromance.utils.advanced.TimerListener;
 import com.frontanilla.necromance.zones.foundations.ZoneFirebase;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
@@ -26,7 +26,7 @@ public class GameFirebase extends ZoneFirebase {
     // Realtime Fetching
     //-------------------
     public void fetchPlayersInRealtime() {
-        sharedFirebase.fetchPlayersInRealtime(new RealtimeChangeListener<DelayedRemovalArray<DBPlayer>>() {
+        sharedFirebase.fetchPlayersInRealtime(new ChangeListener<DelayedRemovalArray<DBPlayer>>() {
             @Override
             public void onCancelled(String message) {
                 System.out.println("Cancelled: " + message);

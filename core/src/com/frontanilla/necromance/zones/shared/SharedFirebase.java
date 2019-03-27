@@ -3,8 +3,8 @@ package com.frontanilla.necromance.zones.shared;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.database.clone.DBPlayer;
+import com.frontanilla.necromance.utils.advanced.ChangeListener;
 import com.frontanilla.necromance.utils.advanced.OnResultListener;
-import com.frontanilla.necromance.utils.advanced.RealtimeChangeListener;
 import com.frontanilla.necromance.utils.advanced.TimerListener;
 import com.frontanilla.necromance.utils.helpers.Find;
 
@@ -22,12 +22,29 @@ public class SharedFirebase {
     //-------------------
     // Realtime Fetching
     //-------------------
-    public void fetchPlayersInRealtime(final RealtimeChangeListener<DelayedRemovalArray<DBPlayer>> listener) {
+    // Version
+    public void fetchVersionInRealtime(final ChangeListener<String> listener) {
+        NecromanceClient.instance.getRealtimeDBInterface().fetchVersionInRealtime(new ChangeListener<String>() {
+            @Override
+            public void onCancelled(String message) {
+                System.out.println("CANCELLED: " + message);
+            }
+
+            @Override
+            public void onDataFetched(String version) {
+                sharedStuff.getDatabaseClone().updateVersion(version);
+                listener.onDataFetched(version);
+            }
+        });
+    }
+
+    // Players
+    public void fetchPlayersInRealtime(final ChangeListener<DelayedRemovalArray<DBPlayer>> listener) {
         NecromanceClient.instance.getRealtimeDBInterface().fetchPlayerDataInRealtime(
-                new RealtimeChangeListener<DelayedRemovalArray<DBPlayer>>() {
+                new ChangeListener<DelayedRemovalArray<DBPlayer>>() {
                     @Override
                     public void onCancelled(String message) {
-                        System.out.println(message);
+                        System.out.println("CANCELLED: " + message);
                     }
 
                     @Override

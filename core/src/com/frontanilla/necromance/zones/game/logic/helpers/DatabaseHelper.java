@@ -1,14 +1,13 @@
 package com.frontanilla.necromance.zones.game.logic.helpers;
 
 import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.database.clone.DBPlayer;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.zones.game.GameAssets;
 import com.frontanilla.necromance.zones.game.GameFirebase;
 import com.frontanilla.necromance.zones.game.GameInput;
-import com.frontanilla.necromance.zones.game.GameStuff;
+import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
 
 public class DatabaseHelper {

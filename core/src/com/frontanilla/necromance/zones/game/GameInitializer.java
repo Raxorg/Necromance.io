@@ -7,6 +7,7 @@ import com.frontanilla.necromance.zones.game.logic.GameLogic;
 import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHelper;
 import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHelper;
+import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class GameInitializer extends ZoneInitializer {
 

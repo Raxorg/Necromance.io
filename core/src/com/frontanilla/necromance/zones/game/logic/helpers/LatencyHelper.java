@@ -2,7 +2,7 @@ package com.frontanilla.necromance.zones.game.logic.helpers;
 
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
-import com.frontanilla.necromance.zones.game.GameStuff;
+import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class LatencyHelper {
 

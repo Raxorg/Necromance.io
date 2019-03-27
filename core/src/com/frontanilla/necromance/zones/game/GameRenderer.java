@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.necromance.zones.foundations.ZoneRenderer;
+import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class GameRenderer extends ZoneRenderer {
 

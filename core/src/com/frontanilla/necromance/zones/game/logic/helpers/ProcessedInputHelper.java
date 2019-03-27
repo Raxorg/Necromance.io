@@ -6,7 +6,7 @@ import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.utils.helpers.Validate;
 import com.frontanilla.necromance.zones.game.GameFirebase;
-import com.frontanilla.necromance.zones.game.GameStuff;
+import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 import static com.frontanilla.necromance.zones.game.GameConstants.HUMAN_SIZE;
 

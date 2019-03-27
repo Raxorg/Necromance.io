@@ -1,4 +1,4 @@
-package com.frontanilla.necromance.zones.game;
+package com.frontanilla.necromance.zones.game.stuff;
 
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.representation.Human;
@@ -15,7 +15,7 @@ public class GameStuff extends ZoneStuff {
 
     @Override
     public void initStuff() {
-        players = new DelayedRemovalArray<Human>();
+        players = new DelayedRemovalArray<>();
     }
 
     public DelayedRemovalArray<Human> getHumanPlayers() {

@@ -2,6 +2,7 @@ package com.frontanilla.necromance.zones.game;
 
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
+import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 import com.frontanilla.necromance.zones.shared.SharedConnector;
 
 public class GameConnector extends ZoneConnector {

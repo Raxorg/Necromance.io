@@ -6,6 +6,7 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneInput;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
+import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class GameInput extends ZoneInput {
 

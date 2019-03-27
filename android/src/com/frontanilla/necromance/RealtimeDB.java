@@ -62,29 +62,12 @@ public class RealtimeDB implements RealtimeDBInterface {
         }
     }
 
-    //-----------------
-    // Player Addition
-    //-----------------
-    @Override
-    public void addPlayer(String playerID, final OnResultListener listener) {
-        playerDataReference.child(playerID).setValue("Bob,0,0,R", new DatabaseReference.CompletionListener() {
-            @Override
-            public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                if (databaseError != null) {
-                    listener.onResult(false);
-                } else {
-                    listener.onResult(true);
-                }
-            }
-        });
-    }
+    //----------------------
+    // Player Field Setting
+    //----------------------
 
-    //---------------
-    // Player Moving
-    //---------------
-    @Override
-    public void movePlayer(String phoneID, int x, int y, final OnResultListener onResultListener) {
-        playerDataReference.child(phoneID).setValue(x + "," + y, new DatabaseReference.CompletionListener() {
+    private void setPlayerReference(String playerID, String newReferenceValue, final OnResultListener onResultListener) {
+        playerDataReference.child(playerID).setValue(newReferenceValue, new DatabaseReference.CompletionListener() {
             @Override
             public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                 if (databaseError != null) {
@@ -94,5 +77,32 @@ public class RealtimeDB implements RealtimeDBInterface {
                 }
             }
         });
+    }
+
+    //-----------------
+    // Player Addition
+    //-----------------
+    @Override
+    public void addPlayer(String playerID, final OnResultListener onResultListener) {
+        String newReferenceValue = "Bob,0,0,R";
+        setPlayerReference(playerID, newReferenceValue, onResultListener);
+    }
+
+    //---------------
+    // Player Moving
+    //---------------
+    @Override
+    public void movePlayer(DBPlayer thisPlayer, int x, int y, final OnResultListener onResultListener) {
+        String newReferenceValue = thisPlayer.getName() + "," + x + "," + y + "," + thisPlayer.getColor();
+        setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
+    }
+
+    //----------------------
+    // Player Name Changing
+    //----------------------
+    @Override
+    public void changePlayerName(DBPlayer thisPlayer, String chosenName, final OnResultListener onResultListener) {
+        String newReferenceValue = chosenName + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + thisPlayer.getColor();
+        setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
     }
 }

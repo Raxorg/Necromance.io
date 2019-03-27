@@ -71,4 +71,8 @@ public class GameFirebase extends ZoneFirebase {
             }
         });
     }
+
+    public void changePlayerName(String chosenName) {
+        sharedFirebase.changePlayerName(chosenName);
+    }
 }

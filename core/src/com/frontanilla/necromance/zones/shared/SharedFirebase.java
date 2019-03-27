@@ -6,6 +6,7 @@ import com.frontanilla.necromance.database.clone.DBPlayer;
 import com.frontanilla.necromance.utils.advanced.OnResultListener;
 import com.frontanilla.necromance.utils.advanced.RealtimeChangeListener;
 import com.frontanilla.necromance.utils.advanced.TimerListener;
+import com.frontanilla.necromance.utils.helpers.Find;
 
 public class SharedFirebase {
 
@@ -48,12 +49,15 @@ public class SharedFirebase {
         NecromanceClient.instance.getRealtimeDBInterface().addPlayer(NecromanceClient.instance.getPhoneID(), listener);
     }
 
+    //---------------
+    // Player Moving
+    //---------------
     public void movePlayer(int x, int y, final OnResultListener onResultListener, final TimerListener timerListener) {
         if (!sharedLogic.isMovingPlayer()) {
             sharedLogic.setMovingPlayer(true);
             timerListener.startTime();
-            String phoneID = NecromanceClient.instance.getPhoneID();
-            NecromanceClient.instance.getRealtimeDBInterface().movePlayer(phoneID, x, y, new OnResultListener() {
+            DBPlayer thisPlayer = Find.databasePlayerWithPhoneID(sharedStuff.getDatabaseClone().getPlayers());
+            NecromanceClient.instance.getRealtimeDBInterface().movePlayer(thisPlayer, x, y, new OnResultListener() {
                 @Override
                 public void onResult(boolean success) {
                     sharedLogic.setMovingPlayer(false);
@@ -63,6 +67,24 @@ public class SharedFirebase {
             });
         } else {
             System.out.println("THE PLAYER IS BEING MOVED, PLEASE WAIT");
+        }
+    }
+
+    //----------------------
+    // Player Name Changing
+    //----------------------
+    public void changePlayerName(String chosenName) {
+        if (!sharedLogic.isChangingName()) {
+            sharedLogic.setChangingName(true);
+            DBPlayer thisPlayer = Find.databasePlayerWithPhoneID(sharedStuff.getDatabaseClone().getPlayers());
+            NecromanceClient.instance.getRealtimeDBInterface().changePlayerName(thisPlayer, chosenName, new OnResultListener() {
+                @Override
+                public void onResult(boolean success) {
+                    sharedLogic.setChangingName(false);
+                }
+            });
+        } else {
+            System.out.println("THE PLAYER NAME IS BEING CHANGED, PLEASE WAIT");
         }
     }
 }

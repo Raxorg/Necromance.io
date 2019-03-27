@@ -13,5 +13,7 @@ public interface RealtimeDBInterface {
 
     void addPlayer(String playerID, OnResultListener listener);
 
-    void movePlayer(String phoneID, int x, int y, OnResultListener onResultListener);
+    void movePlayer(DBPlayer thisPlayer, int x, int y, OnResultListener onResultListener);
+
+    void changePlayerName(DBPlayer thisPlayer, String chosenName, OnResultListener listener);
 }

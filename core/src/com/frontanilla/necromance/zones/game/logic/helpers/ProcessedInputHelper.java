@@ -1,7 +1,9 @@
 package com.frontanilla.necromance.zones.game.logic.helpers;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.frontanilla.necromance.database.representation.Human;
+import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.zones.game.GameFirebase;
 import com.frontanilla.necromance.zones.game.GameStuff;
 
@@ -25,10 +27,19 @@ public class ProcessedInputHelper {
     }
 
     public void touchDownOnHumanPlayer(Human humanPlayer) {
-        if (humanPlayer.getColor() == Color.RED) {
-            humanPlayer.setColor(Color.GREEN);
-        } else {
-            humanPlayer.setColor(Color.RED);
+        if (humanPlayer.equals(Find.humanWithPhoneID(gameStuff.getHumanPlayers()))) {
+            Gdx.input.getTextInput(new Input.TextInputListener() {
+                @Override
+                public void input(String userText) {
+                    String chosenName = userText.substring(0, Math.min(userText.length(), 10));
+                    gameFirebase.changePlayerName(chosenName);
+                }
+
+                @Override
+                public void canceled() {
+
+                }
+            }, "Player name", humanPlayer.getDatabasePlayer().getName(), "Unnamed Newbie");
         }
     }
 

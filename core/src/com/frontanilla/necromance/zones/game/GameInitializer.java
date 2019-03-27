@@ -37,7 +37,7 @@ public class GameInitializer extends ZoneInitializer {
         // Input
         gameInput.initializeStructure(gameLogic, gameScreen, gameStuff);
         // Logic
-        databaseHelper.initializeStructure(gameAssets, gameFirebase, gameInput, gameStuff);
+        databaseHelper.initializeStructure(gameAssets, gameFirebase, gameInput, gameLogic, gameStuff);
         latencyHelper.initializeStructure(gameStuff);
         processedInputHelper.initializeStructure(gameFirebase, gameStuff);
 

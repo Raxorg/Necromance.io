@@ -19,22 +19,26 @@ public class Human {
     private BitmapFont font;
     private TextureRegion textureRegion;
     // Additional - Rendering
-    private float textWidth, textHeight;
-    private Color originalColor, currentColor;
+    private float textHeight;
+    private boolean useOriginalColor;
 
     public Human(DBPlayer databasePlayer) {
         this.databasePlayer = databasePlayer;
-        originalColor = Transform.stringToColor(databasePlayer.getColor());
-        currentColor = Transform.stringToColor(databasePlayer.getColor());
+        useOriginalColor = true;
     }
 
     public void render(SpriteBatch spriteBatch) {
         font.setColor(Color.BLACK);
+        float textWidth = TextUtils.getTextWidth(databasePlayer.getName(), font);
         float fontX = databasePlayer.getX() + HUMAN_SIZE / 2f - textWidth / 2f;
         float fontY = databasePlayer.getY() + HUMAN_SIZE + textHeight + textHeight / 3f;
         font.draw(spriteBatch, databasePlayer.getName(), fontX, fontY);
-        spriteBatch.setColor(currentColor);
-        //spriteBatch.draw(textureRegion, databasePlayer.getX(), databasePlayer.getY(), HUMAN_SIZE, HUMAN_SIZE);
+        Color databasePlayerColor = Transform.stringToColor(databasePlayer.getColor());
+        if (useOriginalColor) {
+            spriteBatch.setColor(databasePlayerColor);
+        } else {
+            spriteBatch.setColor(databasePlayerColor.cpy().lerp(Color.BLACK, 0.5f));
+        }
         spriteBatch.draw(textureRegion, databasePlayer.getX(), databasePlayer.getY(), HUMAN_SIZE, HUMAN_SIZE);
     }
 
@@ -49,7 +53,6 @@ public class Human {
 
     public void setFont(BitmapFont font) {
         this.font = font;
-        textWidth = TextUtils.getTextWidth(databasePlayer.getName(), font);
         textHeight = TextUtils.getTextHeight(databasePlayer.getName(), font);
     }
 
@@ -57,15 +60,7 @@ public class Human {
         this.textureRegion = textureRegion;
     }
 
-    public Color getCurrentColor() {
-        return currentColor;
-    }
-
-    public void setCurrentColor(Color color) {
-        currentColor = color;
-    }
-
-    public Color getOriginalColor() {
-        return originalColor;
+    public void setUseOriginalColor(boolean useOriginalColor) {
+        this.useOriginalColor = useOriginalColor;
     }
 }

@@ -29,6 +29,7 @@ public class TransitionHandler {
 
     public void initState() {
         alpha = 0;
+        started = false;
         splashStuff.getFader().setColor(Color.CLEAR);
     }
 

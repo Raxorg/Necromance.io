@@ -1,6 +1,7 @@
 package com.frontanilla.necromance.zones.menu;
 
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
+import com.frontanilla.necromance.zones.menu.input.MenuInput;
 import com.frontanilla.necromance.zones.menu.logic.MenuLogic;
 import com.frontanilla.necromance.zones.menu.stuff.MenuStuff;
 import com.frontanilla.necromance.zones.shared.SharedConnector;

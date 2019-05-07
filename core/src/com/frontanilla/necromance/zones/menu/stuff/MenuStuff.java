@@ -22,8 +22,9 @@ public class MenuStuff extends ZoneStuff {
         super(sharedStuff);
     }
 
-    public void initializeStructure(MenuAssets menuAssets,
-                                    MenuScreen menuScreen) {
+    public void initializeStructure(
+            MenuAssets menuAssets,
+            MenuScreen menuScreen) {
         this.menuAssets = menuAssets;
         this.menuScreen = menuScreen;
     }
@@ -55,7 +56,10 @@ public class MenuStuff extends ZoneStuff {
                 playButtonHeight);
         playButton.setTextureRegion(menuAssets.getPlank());
         // Wheel Menu
-        wheelMenu = new WheelMenu(staticCamera.viewportWidth / 2f, staticCamera.viewportHeight / 2f, 400, menuAssets.getPlank());
+        wheelMenu = new WheelMenu(
+                staticCamera.viewportWidth / 2f,
+                staticCamera.viewportHeight / 2f,
+                400);
         wheelMenu.setPlankTexture(menuAssets.getPlank());
     }
 

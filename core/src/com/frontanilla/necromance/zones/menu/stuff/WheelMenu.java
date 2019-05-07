@@ -8,38 +8,24 @@ import com.badlogic.gdx.math.Circle;
 import com.badlogic.gdx.math.MathUtils;
 import com.frontanilla.necromance.gui.RectangleButton;
 
+import static com.frontanilla.necromance.zones.menu.MenuConstants.WHEEL_PLANK_HEIGHT;
+import static com.frontanilla.necromance.zones.menu.MenuConstants.WHEEL_PLANK_WIDTH;
+
 public class WheelMenu {
 
     // Components
     private Circle bounds;
     private RectangleButton[] planks;
-    private TextureRegion plankRegion;
     // Logic
     private float rotation;
 
-    public WheelMenu(float x, float y, float r, TextureRegion plankRegion) {
+    public WheelMenu(float x, float y, float r) {
         bounds = new Circle(x, y, r);
         planks = new RectangleButton[10];
         for (int i = 0; i < planks.length; i++) {
-            float angle = (360f / 10f) * i * MathUtils.degreesToRadians + rotation;
-            float plankX = bounds.x + bounds.radius * MathUtils.cos(angle);
-            float plankY = bounds.y + bounds.radius * MathUtils.sin(angle);
-            planks[i] = new RectangleButton(plankX, plankY, 100, 50);
-            planks[i].setTextureRegion(plankRegion);
+            planks[i] = new RectangleButton(0, 0, WHEEL_PLANK_WIDTH, WHEEL_PLANK_HEIGHT);
         }
-        this.plankRegion = plankRegion;
-        rotation = 0;
-    }
-
-    public void update(float delta) {
-        rotation += delta;
-        for (int i = 0; i < planks.length; i++) {
-            float angle = (360f / 10f) * i * MathUtils.degreesToRadians + rotation;
-            float plankX = bounds.x + bounds.radius * MathUtils.cos(angle);
-            float plankY = bounds.y + bounds.radius * MathUtils.sin(angle);
-            planks[i].getBounds().x = plankX;
-            planks[i].getBounds().y = plankY;
-        }
+        setRotation(0);
     }
 
     public void render(SpriteBatch spriteBatch) {
@@ -64,6 +50,28 @@ public class WheelMenu {
     }
 
     public void setPlankTexture(TextureRegion plankRegion) {
-        this.plankRegion = plankRegion;
+        for (int i = 0; i < planks.length; i++) {
+            planks[i].setTextureRegion(plankRegion);
+        }
+    }
+
+    // Getters & Setters
+    public Circle getBounds() {
+        return bounds;
+    }
+
+    public float getRotation() {
+        return rotation;
+    }
+
+    public void setRotation(float rotation) {
+        this.rotation = rotation;
+        for (int i = 0; i < planks.length; i++) {
+            float angle = (360f / 10f) * i * MathUtils.degreesToRadians + rotation;
+            float plankX = bounds.x + bounds.radius * MathUtils.cos(angle);
+            float plankY = bounds.y + bounds.radius * MathUtils.sin(angle);
+            planks[i].getBounds().x = plankX;
+            planks[i].getBounds().y = plankY;
+        }
     }
 }

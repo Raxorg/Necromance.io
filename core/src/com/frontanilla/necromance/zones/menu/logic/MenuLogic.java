@@ -57,4 +57,8 @@ public class MenuLogic extends ZoneLogic {
     public TransitionHandler getTransitionHandler() {
         return transitionHandler;
     }
+
+    public WheelMenuHandler getWheelMenuHandler() {
+        return wheelMenuHandler;
+    }
 }

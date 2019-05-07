@@ -3,6 +3,9 @@ package com.frontanilla.necromance.zones.menu;
 import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.foundations.ZoneInitializer;
+import com.frontanilla.necromance.zones.menu.input.MenuInput;
+import com.frontanilla.necromance.zones.menu.input.helpers.AdvancedInputHandler;
+import com.frontanilla.necromance.zones.menu.input.helpers.BasicInputHandler;
 import com.frontanilla.necromance.zones.menu.logic.MenuLogic;
 import com.frontanilla.necromance.zones.menu.logic.helpers.*;
 import com.frontanilla.necromance.zones.menu.stuff.MenuStuff;
@@ -26,6 +29,9 @@ public class MenuInitializer extends ZoneInitializer {
         MenuStuff menuStuff = (MenuStuff) connector.getStuff();
         // Structure Instantiation
         //-------------------------
+        // Input
+        AdvancedInputHandler advancedInputHandler = new AdvancedInputHandler();
+        BasicInputHandler basicInputHandler = new BasicInputHandler();
         // Logic
         AudioHandler audioHandler = new AudioHandler();
         ButtonHandler buttonHandler = new ButtonHandler();
@@ -35,12 +41,15 @@ public class MenuInitializer extends ZoneInitializer {
         // Structure Initialization
         //--------------------------
         menuAssets.initializeStructure();
-        menuInput.initializeStructure(menuLogic, menuScreen);
+        // Input
+        advancedInputHandler.initializeStructure(menuInput, menuLogic, menuScreen);
+        basicInputHandler.initializeStructure(menuInput, menuLogic, menuScreen);
+        menuInput.initializeStructure(advancedInputHandler, basicInputHandler);
         // Logic
         audioHandler.initializeStructure(menuAssets);
         buttonHandler.initializeStructure(menuLogic, menuStuff);
         gameAssetsHandler.initializeStructure(menuAssets, menuConnector);
-        transitionHandler.initializeStructure(menuLogic, menuStuff);
+        transitionHandler.initializeStructure(menuInput, menuLogic, menuStuff);
         wheelMenuHandler.initializeStructure(menuStuff);
         menuLogic.initializeStructure(audioHandler, buttonHandler, gameAssetsHandler, transitionHandler, wheelMenuHandler);
 

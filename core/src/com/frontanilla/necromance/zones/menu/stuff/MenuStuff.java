@@ -57,9 +57,9 @@ public class MenuStuff extends ZoneStuff {
         playButton.setTextureRegion(menuAssets.getPlank());
         // Wheel Menu
         wheelMenu = new WheelMenu(
-                staticCamera.viewportWidth / 2f,
+                staticCamera.viewportWidth,
                 staticCamera.viewportHeight / 2f,
-                400);
+                staticCamera.viewportHeight / 2f);
         wheelMenu.setPlankTexture(menuAssets.getPlank());
     }
 

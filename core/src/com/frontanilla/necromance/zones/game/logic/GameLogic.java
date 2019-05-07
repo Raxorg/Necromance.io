@@ -1,7 +1,7 @@
 package com.frontanilla.necromance.zones.game.logic;
 
 import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.frontanilla.necromance.database.clone.DBPlayer;
+import com.frontanilla.necromance.database.clone.DBPlayerDocument;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneLogic;
 import com.frontanilla.necromance.zones.game.logic.helpers.CameraHelper;
@@ -44,7 +44,7 @@ public class GameLogic extends ZoneLogic {
     }
 
     // Called by GameFirebase
-    public void onPlayersFetched(DelayedRemovalArray<DBPlayer> players) {
+    public void onPlayersFetched(DelayedRemovalArray<DBPlayerDocument> players) {
         databaseHelper.onPlayersFetched(players);
     }
 

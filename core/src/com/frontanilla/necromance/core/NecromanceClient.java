@@ -1,6 +1,7 @@
 package com.frontanilla.necromance.core;
 
 import com.badlogic.gdx.Game;
+import com.frontanilla.necromance.interfacing.firebase.AuthInterface;
 import com.frontanilla.necromance.interfacing.firebase.RealtimeDBInterface;
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.splash.SplashConnector;
@@ -11,10 +12,12 @@ public class NecromanceClient extends Game {
     public static NecromanceClient instance;
     private String phoneID;
     private RealtimeDBInterface realtimeDBInterface;
+    private AuthInterface authInterface;
 
-    public NecromanceClient(String phoneIdentifier, RealtimeDBInterface realtimeDBInterface) {
+    public NecromanceClient(String phoneIdentifier, RealtimeDBInterface realtimeDBInterface, AuthInterface authInterface) {
         phoneID = phoneIdentifier;
         this.realtimeDBInterface = realtimeDBInterface;
+        this.authInterface = authInterface;
         instance = this;
     }
 
@@ -44,5 +47,9 @@ public class NecromanceClient extends Game {
 
     public RealtimeDBInterface getRealtimeDBInterface() {
         return realtimeDBInterface;
+    }
+
+    public AuthInterface getAuthInterface() {
+        return authInterface;
     }
 }

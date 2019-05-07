@@ -3,6 +3,7 @@ package com.frontanilla.necromance.zones.splash;
 import com.frontanilla.necromance.utils.advanced.ChangeListener;
 import com.frontanilla.necromance.zones.foundations.ZoneFirebase;
 import com.frontanilla.necromance.zones.shared.SharedFirebase;
+import com.frontanilla.necromance.zones.splash.logic.SplashLogic;
 
 public class SplashFirebase extends ZoneFirebase {
 
@@ -30,7 +31,7 @@ public class SplashFirebase extends ZoneFirebase {
             @Override
             public void onDataFetched(String  version) {
                 System.out.println("Version Fetched: " + version);
-                splashLogic.onVersionFetched(version);
+                splashLogic.getDatabaseHandler().onVersionFetched(version);
             }
         });
     }

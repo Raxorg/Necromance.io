@@ -4,18 +4,18 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 
 public class DBPlayerData {
 
-    private DelayedRemovalArray<DBPlayer> databasePlayers;
+    private DelayedRemovalArray<DBPlayerDocument> databasePlayers;
 
     public DBPlayerData() {
         databasePlayers = new DelayedRemovalArray<>();
     }
 
-    public void updatePlayerData(DelayedRemovalArray<DBPlayer> databasePlayers) {
+    public void updatePlayerData(DelayedRemovalArray<DBPlayerDocument> databasePlayers) {
         DB:
         for (int i = 0; i < databasePlayers.size; i++) {
             String playerID = databasePlayers.get(i).getPlayerID();
             for (int j = 0; j < this.databasePlayers.size; j++) {
-                DBPlayer existentPlayer = this.databasePlayers.get(j);
+                DBPlayerDocument existentPlayer = this.databasePlayers.get(j);
                 if (existentPlayer.getPlayerID().equals(playerID)) {
                     existentPlayer.update(databasePlayers.get(i));
                     continue DB;
@@ -25,7 +25,7 @@ public class DBPlayerData {
         }
     }
 
-    public DelayedRemovalArray<DBPlayer> getDatabasePlayers() {
+    public DelayedRemovalArray<DBPlayerDocument> getDatabasePlayers() {
         return databasePlayers;
     }
 

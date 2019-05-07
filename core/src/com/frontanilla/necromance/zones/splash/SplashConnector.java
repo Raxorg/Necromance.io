@@ -2,6 +2,7 @@ package com.frontanilla.necromance.zones.splash;
 
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.shared.SharedConnector;
+import com.frontanilla.necromance.zones.splash.logic.SplashLogic;
 
 public class SplashConnector extends ZoneConnector {
 

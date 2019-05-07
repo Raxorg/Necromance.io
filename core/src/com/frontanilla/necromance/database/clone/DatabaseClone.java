@@ -19,12 +19,12 @@ public class DatabaseClone {
         databaseVersion.updateVersion(version);
     }
 
-    public void updatePlayerData(DelayedRemovalArray<DBPlayer> players) {
+    public void updatePlayerData(DelayedRemovalArray<DBPlayerDocument> players) {
         databasePlayerData.updatePlayerData(players);
     }
 
     // Advanced Getters
-    public DelayedRemovalArray<DBPlayer> getPlayers() {
+    public DelayedRemovalArray<DBPlayerDocument> getPlayers() {
         return databasePlayerData.getDatabasePlayers();
     }
 }

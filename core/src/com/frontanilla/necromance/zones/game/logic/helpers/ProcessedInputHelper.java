@@ -2,7 +2,11 @@ package com.frontanilla.necromance.zones.game.logic.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.database.representation.Human;
+import com.frontanilla.necromance.utils.advanced.DataListener;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.utils.helpers.Validate;
 import com.frontanilla.necromance.zones.game.GameFirebase;
@@ -36,7 +40,7 @@ public class ProcessedInputHelper {
                     String[] parts = chosenName.split(",");
                     if (parts.length > 1) {
                         if (Validate.colorString(parts[1])) {
-                            gameFirebase.changePlayerNameAndColor(parts[0],parts[1]);
+                            gameFirebase.changePlayerNameAndColor(parts[0], parts[1]);
                         }
                     } else {
                         gameFirebase.changePlayerName(chosenName);
@@ -48,6 +52,33 @@ public class ProcessedInputHelper {
 
                 }
             }, "Player name", humanPlayer.getDatabasePlayer().getName(), "Unnamed Newbie");
+        } else {
+            NecromanceClient.instance.getAuthInterface().touchUpOnSignInButton(new DataListener<String>() {
+                @Override
+                public void onData(String googleAccountDisplayName) {
+                    System.out.println(googleAccountDisplayName);
+                }
+            }, new DataListener<int[][]>() {
+                @Override
+                public void onData(final int[][] imageData) {
+                    Gdx.app.postRunnable(new Runnable() {
+                        @Override
+                        public void run() {
+                            Pixmap pixmap = new Pixmap(imageData[0].length, imageData.length, Pixmap.Format.RGBA8888);
+                            for (int row = 0; row < imageData.length; row++) {
+                                for (int column = 0; column < imageData[row].length; column++) {
+                                    int argb = imageData[row][column];
+                                    int rgba = (argb << 8) | (argb >>> (32 - 8));
+                                    pixmap.drawPixel(column, row, rgba);
+                                    pixmap.drawPixel(15, 15, argb);
+                                    pixmap.drawPixel(5, 5, rgba);
+                                }
+                            }
+                            gameStuff.assignTexture(pixmap); // TODO: TEST
+                        }
+                    });
+                }
+            });
         }
     }
 

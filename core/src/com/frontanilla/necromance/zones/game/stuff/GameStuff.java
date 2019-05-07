@@ -1,5 +1,7 @@
 package com.frontanilla.necromance.zones.game.stuff;
 
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneStuff;
@@ -13,6 +15,7 @@ public class GameStuff extends ZoneStuff {
     // Stuff
     private DelayedRemovalArray<Human> players;
     private PlayArea playArea;
+    private Texture texture; // TODO TEST
 
     public GameStuff(SharedStuff sharedStuff) {
         super(sharedStuff);
@@ -36,5 +39,15 @@ public class GameStuff extends ZoneStuff {
 
     public PlayArea getPlayArea() {
         return playArea;
+    }
+
+    // TODO TEST
+    public Texture getTexture() {
+        return texture;
+    }
+
+    public void assignTexture(Pixmap pixmap) {
+        texture = new Texture(pixmap);
+        //pixmap.dispose();
     }
 }

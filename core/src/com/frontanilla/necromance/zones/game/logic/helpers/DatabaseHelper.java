@@ -1,7 +1,7 @@
 package com.frontanilla.necromance.zones.game.logic.helpers;
 
 import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.frontanilla.necromance.database.clone.DBPlayer;
+import com.frontanilla.necromance.database.clone.DBPlayerDocument;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.zones.game.GameAssets;
@@ -36,7 +36,7 @@ public class DatabaseHelper {
     }
 
 
-    public void onPlayersFetched(DelayedRemovalArray<DBPlayer> databasePlayers) {
+    public void onPlayersFetched(DelayedRemovalArray<DBPlayerDocument> databasePlayers) {
         // Enable Input at the First Time Receiving PLayers
         if (!initialPlayersFetched) {
             gameInput.setEnabled(true);

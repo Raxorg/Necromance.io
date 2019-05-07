@@ -2,7 +2,7 @@ package com.frontanilla.necromance.database.clone;
 
 import com.frontanilla.necromance.database.subscribers.DBPlayerSubscriber;
 
-public class DBPlayer {
+public class DBPlayerDocument {
 
     private String playerID;
     private String name;
@@ -11,7 +11,7 @@ public class DBPlayer {
     // Subscriber
     private DBPlayerSubscriber dbPlayerSubscriber;
 
-    public DBPlayer(String playerID, String name, int x, int y, String color) {
+    public DBPlayerDocument(String playerID, String name, int x, int y, String color) {
         this.playerID = playerID;
         this.name = name;
         this.x = x;
@@ -19,13 +19,15 @@ public class DBPlayer {
         this.color = color;
     }
 
-    public void update(DBPlayer databasePlayer) {
+    public void update(DBPlayerDocument databasePlayer) {
         if (playerID.equals(databasePlayer.playerID)) {
             name = databasePlayer.name;
             x = databasePlayer.x;
             y = databasePlayer.y;
             color = databasePlayer.color;
-            dbPlayerSubscriber.onUpdate(this);
+            if (dbPlayerSubscriber != null) {
+                dbPlayerSubscriber.onUpdate(this);
+            }
         } else {
             System.out.println("ATTEMPTING TO UPDATE DB PLAYER WITH ANOTHER DB PLAYER'S PLAYER ID");
         }

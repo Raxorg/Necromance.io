@@ -2,7 +2,7 @@ package com.frontanilla.necromance.utils.helpers;
 
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.core.NecromanceClient;
-import com.frontanilla.necromance.database.clone.DBPlayer;
+import com.frontanilla.necromance.database.clone.DBPlayerDocument;
 import com.frontanilla.necromance.database.representation.Human;
 
 public class Find {
@@ -20,11 +20,11 @@ public class Find {
         return null;
     }
 
-    public static DBPlayer databasePlayerWithPhoneID(DelayedRemovalArray<DBPlayer> databasePlayers) {
+    public static DBPlayerDocument databasePlayerWithPhoneID(DelayedRemovalArray<DBPlayerDocument> databasePlayers) {
         return databasePlayerWithPhoneID(NecromanceClient.instance.getPhoneID(), databasePlayers);
     }
 
-    public static DBPlayer databasePlayerWithPhoneID(String phoneID, DelayedRemovalArray<DBPlayer> databasePlayers) {
+    public static DBPlayerDocument databasePlayerWithPhoneID(String phoneID, DelayedRemovalArray<DBPlayerDocument> databasePlayers) {
         for (int i = 0; i < databasePlayers.size; i++) {
             if (databasePlayers.get(i).getPlayerID().equals(phoneID)) {
                 return databasePlayers.get(i);

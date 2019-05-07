@@ -32,7 +32,9 @@ public class SplashRenderer extends ZoneRenderer {
         spriteBatch.setProjectionMatrix(splashScreen.getStaticCamera().combined);
         // Render Stuff
         spriteBatch.begin();
+        splashStuff.getSplashLogoImage().render(spriteBatch);
         splashStuff.getMessageText().render(spriteBatch);
+        splashStuff.getFader().render(spriteBatch);
         spriteBatch.end();
     }
 }

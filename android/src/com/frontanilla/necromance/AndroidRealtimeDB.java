@@ -3,19 +3,19 @@ package com.frontanilla.necromance;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.frontanilla.necromance.database.clone.DBPlayer;
+import com.frontanilla.necromance.database.clone.DBPlayerDocument;
 import com.frontanilla.necromance.interfacing.firebase.RealtimeDBInterface;
 import com.frontanilla.necromance.utils.advanced.ChangeListener;
 import com.frontanilla.necromance.utils.advanced.OnResultListener;
 import com.google.firebase.database.*;
 
-public class RealtimeDB implements RealtimeDBInterface {
+public class AndroidRealtimeDB implements RealtimeDBInterface {
 
     private DatabaseReference versionReference;
     private DatabaseReference playerDataReference;
     private ValueEventListener playerDataEventListener;
 
-    RealtimeDB() {
+    AndroidRealtimeDB() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.setPersistenceEnabled(false);
         versionReference = database.getReference("version");
@@ -43,11 +43,11 @@ public class RealtimeDB implements RealtimeDBInterface {
 
     // Players
     @Override
-    public void fetchPlayerDataInRealtime(final ChangeListener<DelayedRemovalArray<DBPlayer>> listener) {
+    public void fetchPlayerDataInRealtime(final ChangeListener<DelayedRemovalArray<DBPlayerDocument>> listener) {
         playerDataEventListener = playerDataReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                DelayedRemovalArray<DBPlayer> players = new DelayedRemovalArray<>();
+                DelayedRemovalArray<DBPlayerDocument> players = new DelayedRemovalArray<>();
                 String playerSnapshotValue;
                 String[] parts = new String[0];
                 for (DataSnapshot playerSnapshot : dataSnapshot.getChildren()) {
@@ -55,7 +55,7 @@ public class RealtimeDB implements RealtimeDBInterface {
                     if (playerSnapshotValue != null) {
                         parts = playerSnapshotValue.split(",");
                     }
-                    players.add(new DBPlayer(
+                    players.add(new DBPlayerDocument(
                             playerSnapshot.getKey(),    // Player ID
                             parts[0],                   // Name
                             Integer.parseInt(parts[1]), // X
@@ -111,7 +111,7 @@ public class RealtimeDB implements RealtimeDBInterface {
     // Player Moving
     //---------------
     @Override
-    public void movePlayer(DBPlayer thisPlayer, int x, int y, final OnResultListener onResultListener) {
+    public void movePlayer(DBPlayerDocument thisPlayer, int x, int y, final OnResultListener onResultListener) {
         String newReferenceValue = thisPlayer.getName() + "," + x + "," + y + "," + thisPlayer.getColor();
         setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
     }
@@ -120,7 +120,7 @@ public class RealtimeDB implements RealtimeDBInterface {
     // Player Name Changing
     //----------------------
     @Override
-    public void changePlayerName(DBPlayer thisPlayer, String chosenName, final OnResultListener onResultListener) {
+    public void changePlayerName(DBPlayerDocument thisPlayer, String chosenName, final OnResultListener onResultListener) {
         String newReferenceValue = chosenName + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + thisPlayer.getColor();
         setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
     }
@@ -129,7 +129,7 @@ public class RealtimeDB implements RealtimeDBInterface {
     // Player Color Changing
     //-----------------------
     @Override
-    public void changePlayerColor(DBPlayer thisPlayer, String chosenColor, OnResultListener onResultListener) {
+    public void changePlayerColor(DBPlayerDocument thisPlayer, String chosenColor, OnResultListener onResultListener) {
         String newReferenceValue = thisPlayer.getName() + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + chosenColor;
         setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
     }
@@ -138,7 +138,7 @@ public class RealtimeDB implements RealtimeDBInterface {
     // Player Name And Color Changing
     //--------------------------------
     @Override
-    public void changePlayerNameAndColor(DBPlayer thisPlayer, String chosenName, String chosenColor,
+    public void changePlayerNameAndColor(DBPlayerDocument thisPlayer, String chosenName, String chosenColor,
                                          OnResultListener onResultListener) {
         String newReferenceValue = chosenName + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + chosenColor;
         setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);

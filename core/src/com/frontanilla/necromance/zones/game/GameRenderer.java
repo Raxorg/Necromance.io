@@ -1,6 +1,7 @@
 package com.frontanilla.necromance.zones.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.frontanilla.necromance.zones.foundations.ZoneRenderer;
@@ -36,6 +37,11 @@ public class GameRenderer extends ZoneRenderer {
         gameStuff.getPlayArea().render(spriteBatch);
         for (int i = 0; i < gameStuff.getHumanPlayers().size; i++) {
             gameStuff.getHumanPlayers().get(i).render(spriteBatch);
+        }
+        // TODO: TEST
+        if (gameStuff.getTexture() != null) {
+            spriteBatch.setColor(Color.WHITE);
+            spriteBatch.draw(gameStuff.getTexture(), 1500, 1500);
         }
         spriteBatch.end();
     }

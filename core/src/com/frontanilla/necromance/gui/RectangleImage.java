@@ -5,11 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
-public class RectangleImage {
+public class RectangleImage extends Image {
 
     protected Rectangle bounds;
-    protected TextureRegion textureRegion;
-    protected Color color;
 
     public RectangleImage(float x, float y, float w, float h) {
         bounds = new Rectangle(x, y, w, h);
@@ -28,13 +26,5 @@ public class RectangleImage {
 
     public void setTextureRegion(TextureRegion textureRegion) {
         this.textureRegion = textureRegion;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 }

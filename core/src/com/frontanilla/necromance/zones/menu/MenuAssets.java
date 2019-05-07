@@ -1,19 +1,20 @@
 package com.frontanilla.necromance.zones.menu;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.frontanilla.necromance.zones.foundations.ZoneAssets;
 import com.frontanilla.necromance.zones.game.GameAssets;
 
-import static com.frontanilla.necromance.zones.menu.MenuConstants.MENU_ATLAS_FILE;
-import static com.frontanilla.necromance.zones.menu.MenuConstants.TIMES_SQUARE_FILE;
+import static com.frontanilla.necromance.zones.menu.MenuConstants.*;
 
 public class MenuAssets extends ZoneAssets {
 
     private BitmapFont timesSquare;
     private TextureRegion background, plank, pixel;
+    private Music medieval;
     // Pass to Menu Connector
     private GameAssets gameAssets;
 
@@ -26,6 +27,7 @@ public class MenuAssets extends ZoneAssets {
         assetManager = new AssetManager();
         assetManager.load(TIMES_SQUARE_FILE, BitmapFont.class);
         assetManager.load(MENU_ATLAS_FILE, Texture.class);
+        assetManager.load(MEDIEVAL_MUSIC_FILE, Music.class);
     }
 
     @Override
@@ -35,6 +37,7 @@ public class MenuAssets extends ZoneAssets {
         background = new TextureRegion(menuAtlas, 0, 0, 3000, 1500);
         plank = new TextureRegion(menuAtlas, 0, 1500, 400, 200);
         pixel = new TextureRegion(menuAtlas, 400, 1500, 1, 1);
+        medieval = assetManager.get(MEDIEVAL_MUSIC_FILE, Music.class);
     }
 
     // Getters
@@ -52,6 +55,10 @@ public class MenuAssets extends ZoneAssets {
 
     public TextureRegion getPixel() {
         return pixel;
+    }
+
+    public Music getMedieval() {
+        return medieval;
     }
 
     // Pass to Menu Connector

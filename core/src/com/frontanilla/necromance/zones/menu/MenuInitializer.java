@@ -4,10 +4,7 @@ import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.foundations.ZoneInitializer;
 import com.frontanilla.necromance.zones.menu.logic.MenuLogic;
-import com.frontanilla.necromance.zones.menu.logic.helpers.ButtonHandler;
-import com.frontanilla.necromance.zones.menu.logic.helpers.GameAssetsHandler;
-import com.frontanilla.necromance.zones.menu.logic.helpers.TransitionHandler;
-import com.frontanilla.necromance.zones.menu.logic.helpers.WheelMenuHandler;
+import com.frontanilla.necromance.zones.menu.logic.helpers.*;
 import com.frontanilla.necromance.zones.menu.stuff.MenuStuff;
 
 public class MenuInitializer extends ZoneInitializer {
@@ -30,6 +27,7 @@ public class MenuInitializer extends ZoneInitializer {
         // Structure Instantiation
         //-------------------------
         // Logic
+        AudioHandler audioHandler = new AudioHandler();
         ButtonHandler buttonHandler = new ButtonHandler();
         GameAssetsHandler gameAssetsHandler = new GameAssetsHandler();
         TransitionHandler transitionHandler = new TransitionHandler();
@@ -39,11 +37,12 @@ public class MenuInitializer extends ZoneInitializer {
         menuAssets.initializeStructure();
         menuInput.initializeStructure(menuLogic, menuScreen);
         // Logic
+        audioHandler.initializeStructure(menuAssets);
         buttonHandler.initializeStructure(menuLogic, menuStuff);
         gameAssetsHandler.initializeStructure(menuAssets, menuConnector);
         transitionHandler.initializeStructure(menuLogic, menuStuff);
         wheelMenuHandler.initializeStructure(menuStuff);
-        menuLogic.initializeStructure(buttonHandler, gameAssetsHandler, transitionHandler, wheelMenuHandler);
+        menuLogic.initializeStructure(audioHandler, buttonHandler, gameAssetsHandler, transitionHandler, wheelMenuHandler);
 
         menuRenderer.initializeStructure(menuScreen, menuStuff);
         menuStuff.initializeStructure(menuAssets, menuScreen);

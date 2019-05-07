@@ -1,15 +1,13 @@
 package com.frontanilla.necromance.zones.menu.logic;
 
 import com.frontanilla.necromance.zones.foundations.ZoneLogic;
-import com.frontanilla.necromance.zones.menu.logic.helpers.ButtonHandler;
-import com.frontanilla.necromance.zones.menu.logic.helpers.GameAssetsHandler;
-import com.frontanilla.necromance.zones.menu.logic.helpers.TransitionHandler;
-import com.frontanilla.necromance.zones.menu.logic.helpers.WheelMenuHandler;
+import com.frontanilla.necromance.zones.menu.logic.helpers.*;
 import com.frontanilla.necromance.zones.shared.SharedLogic;
 
 public class MenuLogic extends ZoneLogic {
 
     // Structure
+    private AudioHandler audioHandler;
     private ButtonHandler buttonHandler;
     private GameAssetsHandler gameAssetsHandler;
     private TransitionHandler transitionHandler;
@@ -20,10 +18,12 @@ public class MenuLogic extends ZoneLogic {
     }
 
     public void initializeStructure(
+            AudioHandler audioHandler,
             ButtonHandler buttonHandler,
             GameAssetsHandler gameAssetsHandler,
             TransitionHandler transitionHandler,
             WheelMenuHandler wheelMenuHandler) {
+        this.audioHandler = audioHandler;
         this.buttonHandler = buttonHandler;
         this.gameAssetsHandler = gameAssetsHandler;
         this.transitionHandler = transitionHandler;
@@ -32,6 +32,7 @@ public class MenuLogic extends ZoneLogic {
 
     @Override
     public void initState() {
+        audioHandler.initState();
         buttonHandler.initState();
         transitionHandler.initState();
         wheelMenuHandler.initState();

@@ -6,7 +6,7 @@ public class SplashConstants {
     public static final String TIMES_SQUARE_FILE = "fonts/timesSquare.fnt";
     public static final String SPLASH_ATLAS_FILE = "images/splash/splashAtlas.png";
     // Logic
-    public static final float FADING_DURATION = 2f;
+    public static final float FADING_DURATION = 1f;
     // Screen
     public static final int CAMERA_HEIGHT = 1000;
     // Stuff

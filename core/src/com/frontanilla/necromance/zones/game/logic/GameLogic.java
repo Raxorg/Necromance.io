@@ -1,7 +1,5 @@
 package com.frontanilla.necromance.zones.game.logic;
 
-import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.frontanilla.necromance.database.clone.DBPlayerDocument;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneLogic;
 import com.frontanilla.necromance.zones.game.logic.helpers.CameraHelper;
@@ -43,30 +41,16 @@ public class GameLogic extends ZoneLogic {
         latencyHandler.update(delta);
     }
 
-    // Called by GameFirebase
-    public void onPlayersFetched(DelayedRemovalArray<DBPlayerDocument> players) {
-        databaseHandler.onPlayersFetched(players);
-    }
-
-    public void onMovePlayerStartTime() {
-        latencyHandler.onMovePlayerStartTime();
-    }
-
-    public void onMovePlayerStopTime() {
-        latencyHandler.onMovePlayerStopTime();
-    }
-
-    // Called by GameInput
-    public void touchDownOnHumanPlayer(Human humanPlayer) {
-        processedInputHandler.touchDownOnHumanPlayer(humanPlayer);
-    }
-
-    public void touchDownOnEmptySpace(int x, int y) {
-        processedInputHandler.touchDownOnEmptySpace(x, y);
-    }
-
     // Getters
     public DatabaseHandler getDatabaseHandler() {
         return databaseHandler;
+    }
+
+    public LatencyHandler getLatencyHandler() {
+        return latencyHandler;
+    }
+
+    public ProcessedInputHandler getProcessedInputHandler() {
+        return processedInputHandler;
     }
 }

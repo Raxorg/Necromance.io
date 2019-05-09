@@ -37,12 +37,12 @@ public class GameInput extends ZoneInput {
         DelayedRemovalArray<Human> humanPlayers = gameStuff.getHumanPlayers();
         for (int i = 0; i < humanPlayers.size; i++) {
             if (humanPlayers.get(i).contains(unprojected.x, unprojected.y)) {
-                gameLogic.touchDownOnHumanPlayer(humanPlayers.get(i));
+                gameLogic.getProcessedInputHandler().touchDownOnHumanPlayer(humanPlayers.get(i));
                 return false;
             }
         }
         // Empty Space
-        gameLogic.touchDownOnEmptySpace((int) unprojected.x, (int) unprojected.y);
+        gameLogic.getProcessedInputHandler().touchDownOnEmptySpace((int) unprojected.x, (int) unprojected.y);
         return false;
     }
 }

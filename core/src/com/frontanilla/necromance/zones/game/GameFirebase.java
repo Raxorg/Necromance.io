@@ -39,7 +39,7 @@ public class GameFirebase extends ZoneFirebase {
                     System.out.print(player + ", ");
                 }
                 System.out.println();
-                gameLogic.onPlayersFetched(players);
+                gameLogic.getDatabaseHandler().onPlayersFetched(players);
             }
         });
     }
@@ -62,12 +62,12 @@ public class GameFirebase extends ZoneFirebase {
         }, new TimerListener() {
             @Override
             public void startTime() {
-                gameLogic.onMovePlayerStartTime();
+                gameLogic.getLatencyHandler().onMovePlayerStartTime();
             }
 
             @Override
             public void stopTime() {
-                gameLogic.onMovePlayerStopTime();
+                gameLogic.getLatencyHandler().onMovePlayerStopTime();
             }
         });
     }

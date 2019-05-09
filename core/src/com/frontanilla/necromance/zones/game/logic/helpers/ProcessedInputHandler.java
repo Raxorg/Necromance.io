@@ -14,7 +14,7 @@ import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 import static com.frontanilla.necromance.zones.game.GameConstants.HUMAN_SIZE;
 
-public class ProcessedInputHelper {
+public class ProcessedInputHandler {
 
     // Structure
     private GameFirebase gameFirebase;

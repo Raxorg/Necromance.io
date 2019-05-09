@@ -4,7 +4,7 @@ import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
-public class LatencyHelper {
+public class LatencyHandler {
 
     // Structure
     private GameStuff gameStuff;

@@ -5,63 +5,68 @@ import com.frontanilla.necromance.database.clone.DBPlayerDocument;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneLogic;
 import com.frontanilla.necromance.zones.game.logic.helpers.CameraHelper;
-import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHelper;
-import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHelper;
-import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHelper;
+import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHandler;
+import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHandler;
+import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHandler;
 import com.frontanilla.necromance.zones.shared.SharedLogic;
 
 public class GameLogic extends ZoneLogic {
 
     // Structure
     private CameraHelper cameraHelper;
-    private DatabaseHelper databaseHelper;
-    private LatencyHelper latencyHelper;
-    private ProcessedInputHelper processedInputHelper;
+    private DatabaseHandler databaseHandler;
+    private LatencyHandler latencyHandler;
+    private ProcessedInputHandler processedInputHandler;
 
     public GameLogic(SharedLogic sharedLogic) {
         super(sharedLogic);
     }
 
-    public void initializeStructure(CameraHelper cameraHelper, DatabaseHelper databaseHelper, LatencyHelper latencyHelper,
-                                    ProcessedInputHelper processedInputHelper) {
+    public void initializeStructure(CameraHelper cameraHelper, DatabaseHandler databaseHandler, LatencyHandler latencyHandler,
+                                    ProcessedInputHandler processedInputHandler) {
         this.cameraHelper = cameraHelper;
-        this.databaseHelper = databaseHelper;
-        this.latencyHelper = latencyHelper;
-        this.processedInputHelper = processedInputHelper;
+        this.databaseHandler = databaseHandler;
+        this.latencyHandler = latencyHandler;
+        this.processedInputHandler = processedInputHandler;
     }
 
     @Override
     public void initState() {
         cameraHelper.initState();
-        databaseHelper.initState();
-        latencyHelper.initState();
-        processedInputHelper.initState();
+        databaseHandler.initState();
+        latencyHandler.initState();
+        processedInputHandler.initState();
     }
 
     @Override
     public void update(float delta) {
-        latencyHelper.update(delta);
+        latencyHandler.update(delta);
     }
 
     // Called by GameFirebase
     public void onPlayersFetched(DelayedRemovalArray<DBPlayerDocument> players) {
-        databaseHelper.onPlayersFetched(players);
+        databaseHandler.onPlayersFetched(players);
     }
 
     public void onMovePlayerStartTime() {
-        latencyHelper.onMovePlayerStartTime();
+        latencyHandler.onMovePlayerStartTime();
     }
 
     public void onMovePlayerStopTime() {
-        latencyHelper.onMovePlayerStopTime();
+        latencyHandler.onMovePlayerStopTime();
     }
 
     // Called by GameInput
     public void touchDownOnHumanPlayer(Human humanPlayer) {
-        processedInputHelper.touchDownOnHumanPlayer(humanPlayer);
+        processedInputHandler.touchDownOnHumanPlayer(humanPlayer);
     }
 
     public void touchDownOnEmptySpace(int x, int y) {
-        processedInputHelper.touchDownOnEmptySpace(x, y);
+        processedInputHandler.touchDownOnEmptySpace(x, y);
+    }
+
+    // Getters
+    public DatabaseHandler getDatabaseHandler() {
+        return databaseHandler;
     }
 }

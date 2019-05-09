@@ -10,7 +10,7 @@ import com.frontanilla.necromance.zones.game.GameInput;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
-public class DatabaseHelper {
+public class DatabaseHandler {
 
     // Structure
     private GameAssets gameAssets;

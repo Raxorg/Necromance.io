@@ -5,9 +5,9 @@ import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.foundations.ZoneInitializer;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
 import com.frontanilla.necromance.zones.game.logic.helpers.CameraHelper;
-import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHelper;
-import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHelper;
-import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHelper;
+import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHandler;
+import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHandler;
+import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHandler;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class GameInitializer extends ZoneInitializer {
@@ -30,9 +30,9 @@ public class GameInitializer extends ZoneInitializer {
         // Structure Instantiation
         //-------------------------
         CameraHelper cameraHelper = new CameraHelper();
-        DatabaseHelper databaseHelper = new DatabaseHelper();
-        LatencyHelper latencyHelper = new LatencyHelper();
-        ProcessedInputHelper processedInputHelper = new ProcessedInputHelper();
+        DatabaseHandler databaseHandler = new DatabaseHandler();
+        LatencyHandler latencyHandler = new LatencyHandler();
+        ProcessedInputHandler processedInputHandler = new ProcessedInputHandler();
         // Structure Initialization
         //--------------------------
         // Firebase
@@ -41,11 +41,11 @@ public class GameInitializer extends ZoneInitializer {
         gameInput.initializeStructure(gameLogic, gameScreen, gameStuff);
         // Logic
         cameraHelper.initializeStructure(gameScreen, gameStuff);
-        databaseHelper.initializeStructure(gameAssets, gameFirebase, gameInput, gameLogic, gameStuff);
-        latencyHelper.initializeStructure(gameStuff);
-        processedInputHelper.initializeStructure(gameFirebase, gameStuff);
+        databaseHandler.initializeStructure(gameAssets, gameFirebase, gameInput, gameLogic, gameStuff);
+        latencyHandler.initializeStructure(gameStuff);
+        processedInputHandler.initializeStructure(gameFirebase, gameStuff);
 
-        gameLogic.initializeStructure(cameraHelper, databaseHelper, latencyHelper, processedInputHelper);
+        gameLogic.initializeStructure(cameraHelper, databaseHandler, latencyHandler, processedInputHandler);
         // Renderer
         gameRenderer.initializeStructure(gameScreen, gameStuff);
         // Stuff

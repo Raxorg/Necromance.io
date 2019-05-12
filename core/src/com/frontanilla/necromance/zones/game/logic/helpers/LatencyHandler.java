@@ -3,7 +3,6 @@ package com.frontanilla.necromance.zones.game.logic.helpers;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.zones.game.GameNetworked;
-import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 import static com.frontanilla.necromance.zones.game.GameConstants.MAX_ALLOWED_DELAY;
 

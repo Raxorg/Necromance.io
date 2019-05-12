@@ -8,7 +8,7 @@ import com.frontanilla.necromance.utils.advanced.OnResultListener;
 
 public class FakeDatabase {
 
-    public static final float FAKE_RESPONSE_DELAY = 2f; // In seconds
+    public static final float FAKE_RESPONSE_DELAY = 1f; // In seconds
 
     private String version;
     private DelayedRemovalArray<String> playerData;
@@ -59,7 +59,6 @@ public class FakeDatabase {
         }
         if (existentPlayerIndex != -1) {
             playerData.set(existentPlayerIndex, value);
-            onResultListener.onResult(true);
         } else {
             addPlayerDocument(value);
         }

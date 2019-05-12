@@ -42,5 +42,7 @@ public class LatencyHandler {
     public void onMovePlayerStopTime() {
         movePlayerTime = 0;
         movePlayerTimeStarted = false;
+        Human thisHuman = Find.humanWithPhoneID(gameNetworked.getHumanPlayers());
+        thisHuman.setUseOriginalColor(true);
     }
 }

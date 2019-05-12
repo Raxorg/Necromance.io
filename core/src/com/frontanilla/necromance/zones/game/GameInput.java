@@ -6,19 +6,18 @@ import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneInput;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
-import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class GameInput extends ZoneInput {
 
     // Structure
     private GameLogic gameLogic;
     private GameScreen gameScreen;
-    private GameStuff gameStuff;
+    private GameNetworked gameNetworked;
 
-    public void initializeStructure(GameLogic gameLogic, GameScreen gameScreen, GameStuff gameStuff) {
+    public void initializeStructure(GameLogic gameLogic, GameScreen gameScreen, GameNetworked gameNetworked) {
         this.gameLogic = gameLogic;
         this.gameScreen = gameScreen;
-        this.gameStuff = gameStuff;
+        this.gameNetworked = gameNetworked;
     }
 
     @Override
@@ -34,7 +33,7 @@ public class GameInput extends ZoneInput {
         }
         unprojected.set(gameScreen.getStaticCamera().unproject(new Vector3(screenX, screenY, 0)));
         // Human Players
-        DelayedRemovalArray<Human> humanPlayers = gameStuff.getHumanPlayers();
+        DelayedRemovalArray<Human> humanPlayers = gameNetworked.getHumanPlayers();
         for (int i = 0; i < humanPlayers.size; i++) {
             if (humanPlayers.get(i).contains(unprojected.x, unprojected.y)) {
                 gameLogic.getProcessedInputHandler().touchDownOnHumanPlayer(humanPlayers.get(i));

@@ -7,8 +7,8 @@ import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.zones.game.GameAssets;
 import com.frontanilla.necromance.zones.game.GameFirebase;
 import com.frontanilla.necromance.zones.game.GameInput;
+import com.frontanilla.necromance.zones.game.GameNetworked;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
-import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class DatabaseHandler {
 
@@ -17,17 +17,21 @@ public class DatabaseHandler {
     private GameFirebase gameFirebase;
     private GameInput gameInput;
     private GameLogic gameLogic;
-    private GameStuff gameStuff;
+    private GameNetworked gameNetworked;
     // Logic
     private boolean initialPlayersFetched;
 
-    public void initializeStructure(GameAssets gameAssets, GameFirebase gameFirebase, GameInput gameInput, GameLogic gameLogic,
-                                    GameStuff gameStuff) {
+    public void initializeStructure(
+            GameAssets gameAssets,
+            GameFirebase gameFirebase,
+            GameInput gameInput,
+            GameLogic gameLogic,
+            GameNetworked gameNetworked) {
         this.gameAssets = gameAssets;
         this.gameFirebase = gameFirebase;
         this.gameInput = gameInput;
         this.gameLogic = gameLogic;
-        this.gameStuff = gameStuff;
+        this.gameNetworked = gameNetworked;
     }
 
     public void initState() {
@@ -46,18 +50,18 @@ public class DatabaseHandler {
         DB:
         for (int i = 0; i < databasePlayers.size; i++) {
             String databasePlayerID = databasePlayers.get(i).getPlayerID();
-            for (int j = 0; j < gameStuff.getHumanPlayers().size; j++) {
-                String existentPlayerID = gameStuff.getHumanPlayers().get(j).getDatabasePlayer().getPlayerID();
+            for (int j = 0; j < gameNetworked.getHumanPlayers().size; j++) {
+                String existentPlayerID = gameNetworked.getHumanPlayers().get(j).getDatabasePlayer().getPlayerID();
                 if (existentPlayerID.equals(databasePlayerID)) {
                     continue DB;
                 }
             }
             Human newHuman = new Human(databasePlayers.get(i), gameAssets.getFrozenNinePatch(), gameAssets.getTimesSquare());
             newHuman.setTextureRegion(gameAssets.getHuman());
-            gameStuff.getHumanPlayers().add(newHuman);
+            gameNetworked.getHumanPlayers().add(newHuman);
         }
         // Add to Database or Restore Color of This Player
-        Human thisPlayer = Find.humanWithPhoneID(gameStuff.getHumanPlayers());
+        Human thisPlayer = Find.humanWithPhoneID(gameNetworked.getHumanPlayers());
         if (thisPlayer == null) {
             // This Player is not in the Database, Add it
             gameFirebase.addPlayer();

@@ -17,7 +17,7 @@ public class CameraHelper {
 
     public void initState() {
         OrthographicCamera staticCamera = gameScreen.getStaticCamera();
-        Rectangle playAreaBounds = gameStuff.getPlayArea().getBounds();
+        Rectangle playAreaBounds = gameStuff.getMap().getPlayArea().getBounds();
         float cameraX = playAreaBounds.x + playAreaBounds.width / 2f;
         float cameraY = playAreaBounds.y + staticCamera.viewportHeight / 2f;
         staticCamera.position.set(cameraX, cameraY, 0);

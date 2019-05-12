@@ -24,7 +24,7 @@ public class Human extends DBPlayerSubscriber {
 
     public Human(DBPlayerDocument playerDocument, TextureRegion nameBoxNinePatch, BitmapFont nameBoxBitmapFont) {
         this.databasePlayer = playerDocument;
-        playerDocument.setDbPlayerSubscriber(this);
+        playerDocument.setDBPlayerSubscriber(this);
         useOriginalColor = true;
         // Name Box
         nameBox = new NameBox(nameBoxNinePatch, nameBoxBitmapFont);

@@ -1,11 +1,7 @@
 package com.frontanilla.necromance.zones.game.logic;
 
-import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneLogic;
-import com.frontanilla.necromance.zones.game.logic.helpers.CameraHelper;
-import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHandler;
-import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHandler;
-import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHandler;
+import com.frontanilla.necromance.zones.game.logic.helpers.*;
 import com.frontanilla.necromance.zones.shared.SharedLogic;
 
 public class GameLogic extends ZoneLogic {
@@ -15,17 +11,23 @@ public class GameLogic extends ZoneLogic {
     private DatabaseHandler databaseHandler;
     private LatencyHandler latencyHandler;
     private ProcessedInputHandler processedInputHandler;
+    private SpawningHandler spawningHandler;
 
     public GameLogic(SharedLogic sharedLogic) {
         super(sharedLogic);
     }
 
-    public void initializeStructure(CameraHelper cameraHelper, DatabaseHandler databaseHandler, LatencyHandler latencyHandler,
-                                    ProcessedInputHandler processedInputHandler) {
+    public void initializeStructure(
+            CameraHelper cameraHelper,
+            DatabaseHandler databaseHandler,
+            LatencyHandler latencyHandler,
+            ProcessedInputHandler processedInputHandler,
+            SpawningHandler spawningHandler) {
         this.cameraHelper = cameraHelper;
         this.databaseHandler = databaseHandler;
         this.latencyHandler = latencyHandler;
         this.processedInputHandler = processedInputHandler;
+        this.spawningHandler = spawningHandler;
     }
 
     @Override
@@ -34,6 +36,7 @@ public class GameLogic extends ZoneLogic {
         databaseHandler.initState();
         latencyHandler.initState();
         processedInputHandler.initState();
+        spawningHandler.initState();
     }
 
     @Override

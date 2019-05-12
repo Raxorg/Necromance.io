@@ -10,6 +10,7 @@ public abstract class ZoneConnector {
     protected ZoneInitializer initializer;
     protected ZoneInput input;
     protected ZoneLogic logic;
+    protected ZoneNetworked networked;
     protected ZoneRenderer renderer;
     protected ZoneScreen screen;
     protected ZoneStuff stuff;
@@ -40,6 +41,10 @@ public abstract class ZoneConnector {
 
     public ZoneLogic getLogic() {
         return logic;
+    }
+
+    public ZoneNetworked getNetworked() {
+        return networked;
     }
 
     public ZoneRenderer getRenderer() {

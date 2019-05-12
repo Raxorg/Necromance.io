@@ -59,7 +59,7 @@ public class DBPlayerDocument {
         return color;
     }
 
-    public void setDbPlayerSubscriber(DBPlayerSubscriber dbPlayerSubscriber) {
+    public void setDBPlayerSubscriber(DBPlayerSubscriber dbPlayerSubscriber) {
         this.dbPlayerSubscriber = dbPlayerSubscriber;
     }
 }

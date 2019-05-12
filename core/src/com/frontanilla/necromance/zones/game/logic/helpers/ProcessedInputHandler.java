@@ -2,7 +2,6 @@ package com.frontanilla.necromance.zones.game.logic.helpers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.database.representation.Human;
@@ -10,6 +9,7 @@ import com.frontanilla.necromance.utils.advanced.DataListener;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.utils.helpers.Validate;
 import com.frontanilla.necromance.zones.game.GameFirebase;
+import com.frontanilla.necromance.zones.game.GameNetworked;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 import static com.frontanilla.necromance.zones.game.GameConstants.HUMAN_SIZE;
@@ -18,21 +18,26 @@ public class ProcessedInputHandler {
 
     // Structure
     private GameFirebase gameFirebase;
+    private GameNetworked gameNetworked;
     private GameStuff gameStuff;
     // Logic
 
 
-    public void initializeStructure(GameFirebase gameFirebase, GameStuff gameStuff) {
+    public void initializeStructure(
+            GameFirebase gameFirebase,
+            GameNetworked gameNetworked,
+            GameStuff gameStuff) {
         this.gameFirebase = gameFirebase;
+        this.gameNetworked = gameNetworked;
         this.gameStuff = gameStuff;
     }
 
     public void initState() {
-
+        // TODO
     }
 
     public void touchDownOnHumanPlayer(Human humanPlayer) {
-        if (humanPlayer.equals(Find.humanWithPhoneID(gameStuff.getHumanPlayers()))) {
+        if (humanPlayer.equals(Find.humanWithPhoneID(gameNetworked.getHumanPlayers()))) {
             Gdx.input.getTextInput(new Input.TextInputListener() {
                 @Override
                 public void input(String userText) {
@@ -49,9 +54,9 @@ public class ProcessedInputHandler {
 
                 @Override
                 public void canceled() {
-
+                    // TODO
                 }
-            }, "Player name", humanPlayer.getDatabasePlayer().getName(), "Unnamed Newbie");
+            }, "Player name", humanPlayer.getDatabasePlayer().getName(), "");
         } else {
             NecromanceClient.instance.getAuthInterface().touchUpOnSignInButton(new DataListener<String>() {
                 @Override

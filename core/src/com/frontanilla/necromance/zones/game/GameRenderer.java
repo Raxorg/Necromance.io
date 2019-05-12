@@ -10,12 +10,17 @@ import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 public class GameRenderer extends ZoneRenderer {
 
     // Structure
+    private GameNetworked gameNetworked;
     private GameScreen gameScreen;
     private GameStuff gameStuff;
     // Rendering
     private SpriteBatch spriteBatch;
 
-    public void initializeStructure(GameScreen gameScreen, GameStuff gameStuff) {
+    public void initializeStructure(
+            GameNetworked gameNetworked,
+            GameScreen gameScreen,
+            GameStuff gameStuff) {
+        this.gameNetworked = gameNetworked;
         this.gameScreen = gameScreen;
         this.gameStuff = gameStuff;
     }
@@ -34,9 +39,9 @@ public class GameRenderer extends ZoneRenderer {
         spriteBatch.setProjectionMatrix(gameScreen.getStaticCamera().combined);
         // Render Stuff
         spriteBatch.begin();
-        gameStuff.getPlayArea().render(spriteBatch);
-        for (int i = 0; i < gameStuff.getHumanPlayers().size; i++) {
-            gameStuff.getHumanPlayers().get(i).render(spriteBatch);
+        gameStuff.getMap().render(spriteBatch);
+        for (int i = 0; i < gameNetworked.getHumanPlayers().size; i++) {
+            gameNetworked.getHumanPlayers().get(i).render(spriteBatch);
         }
         // TODO: TEST
         if (gameStuff.getTexture() != null) {

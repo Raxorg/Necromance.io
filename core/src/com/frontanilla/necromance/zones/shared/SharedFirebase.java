@@ -73,7 +73,7 @@ public class SharedFirebase {
         if (!sharedLogic.isMovingPlayer()) {
             sharedLogic.setMovingPlayer(true);
             timerListener.startTime();
-            DBPlayerDocument thisPlayer = Find.databasePlayerWithPhoneID(sharedStuff.getDatabaseClone().getPlayers());
+            DBPlayerDocument thisPlayer = Find.databasePlayerWithThisPhoneID(sharedStuff.getDatabaseClone().getPlayers());
             NecromanceClient.instance.getRealtimeDBInterface().movePlayer(thisPlayer, x, y, new OnResultListener() {
                 @Override
                 public void onResult(boolean success) {
@@ -93,7 +93,7 @@ public class SharedFirebase {
     public void changePlayerName(String chosenName) {
         if (!sharedLogic.isChangingName()) {
             sharedLogic.setChangingName(true);
-            DBPlayerDocument thisPlayer = Find.databasePlayerWithPhoneID(sharedStuff.getDatabaseClone().getPlayers());
+            DBPlayerDocument thisPlayer = Find.databasePlayerWithThisPhoneID(sharedStuff.getDatabaseClone().getPlayers());
             NecromanceClient.instance.getRealtimeDBInterface().changePlayerName(thisPlayer, chosenName, new OnResultListener() {
                 @Override
                 public void onResult(boolean success) {
@@ -108,7 +108,7 @@ public class SharedFirebase {
     public void changePlayerColor(String chosenColor) {
         if (!sharedLogic.isChangingColor()) {
             sharedLogic.setChangingColor(true);
-            DBPlayerDocument thisPlayer = Find.databasePlayerWithPhoneID(sharedStuff.getDatabaseClone().getPlayers());
+            DBPlayerDocument thisPlayer = Find.databasePlayerWithThisPhoneID(sharedStuff.getDatabaseClone().getPlayers());
             NecromanceClient.instance.getRealtimeDBInterface().changePlayerColor(thisPlayer, chosenColor, new OnResultListener() {
                 @Override
                 public void onResult(boolean success) {
@@ -124,7 +124,7 @@ public class SharedFirebase {
         if (!sharedLogic.isChangingName() && !sharedLogic.isChangingColor()) {
             sharedLogic.setChangingName(true);
             sharedLogic.setChangingColor(true);
-            DBPlayerDocument thisPlayer = Find.databasePlayerWithPhoneID(sharedStuff.getDatabaseClone().getPlayers());
+            DBPlayerDocument thisPlayer = Find.databasePlayerWithThisPhoneID(sharedStuff.getDatabaseClone().getPlayers());
             NecromanceClient.instance.getRealtimeDBInterface().changePlayerNameAndColor(thisPlayer, chosenName, chosenColor,
                     new OnResultListener() {
                         @Override

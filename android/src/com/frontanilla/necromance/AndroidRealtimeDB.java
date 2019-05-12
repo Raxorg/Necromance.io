@@ -84,7 +84,6 @@ public class AndroidRealtimeDB implements RealtimeDBInterface {
     //----------------------
     // Player Field Setting
     //----------------------
-
     private void setPlayerReference(String playerID, String newReferenceValue, final OnResultListener onResultListener) {
         playerDataReference.child(playerID).setValue(newReferenceValue, new DatabaseReference.CompletionListener() {
             @Override
@@ -138,8 +137,7 @@ public class AndroidRealtimeDB implements RealtimeDBInterface {
     // Player Name And Color Changing
     //--------------------------------
     @Override
-    public void changePlayerNameAndColor(DBPlayerDocument thisPlayer, String chosenName, String chosenColor,
-                                         OnResultListener onResultListener) {
+    public void changePlayerNameAndColor(DBPlayerDocument thisPlayer, String chosenName, String chosenColor, OnResultListener onResultListener) {
         String newReferenceValue = chosenName + "," + thisPlayer.getX() + "," + thisPlayer.getY() + "," + chosenColor;
         setPlayerReference(thisPlayer.getPlayerID(), newReferenceValue, onResultListener);
     }

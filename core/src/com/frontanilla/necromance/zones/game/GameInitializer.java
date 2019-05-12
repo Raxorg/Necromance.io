@@ -4,10 +4,7 @@ import com.frontanilla.necromance.core.NecromanceClient;
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.foundations.ZoneInitializer;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
-import com.frontanilla.necromance.zones.game.logic.helpers.CameraHelper;
-import com.frontanilla.necromance.zones.game.logic.helpers.DatabaseHandler;
-import com.frontanilla.necromance.zones.game.logic.helpers.LatencyHandler;
-import com.frontanilla.necromance.zones.game.logic.helpers.ProcessedInputHandler;
+import com.frontanilla.necromance.zones.game.logic.helpers.*;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class GameInitializer extends ZoneInitializer {
@@ -24,6 +21,7 @@ public class GameInitializer extends ZoneInitializer {
         GameFirebase gameFirebase = (GameFirebase) connector.getFirebase();
         GameInput gameInput = (GameInput) connector.getInput();
         GameLogic gameLogic = (GameLogic) connector.getLogic();
+        GameNetworked gameNetworked = (GameNetworked) connector.getNetworked();
         GameRenderer gameRenderer = (GameRenderer) connector.getRenderer();
         GameScreen gameScreen = (GameScreen) connector.getScreen();
         GameStuff gameStuff = (GameStuff) connector.getStuff();
@@ -33,21 +31,23 @@ public class GameInitializer extends ZoneInitializer {
         DatabaseHandler databaseHandler = new DatabaseHandler();
         LatencyHandler latencyHandler = new LatencyHandler();
         ProcessedInputHandler processedInputHandler = new ProcessedInputHandler();
+        SpawningHandler spawningHandler = new SpawningHandler();
         // Structure Initialization
         //--------------------------
         // Firebase
         gameFirebase.initializeStructure(gameLogic);
         // Input
-        gameInput.initializeStructure(gameLogic, gameScreen, gameStuff);
+        gameInput.initializeStructure(gameLogic, gameScreen, gameNetworked);
         // Logic
         cameraHelper.initializeStructure(gameScreen, gameStuff);
-        databaseHandler.initializeStructure(gameAssets, gameFirebase, gameInput, gameLogic, gameStuff);
-        latencyHandler.initializeStructure(gameStuff);
-        processedInputHandler.initializeStructure(gameFirebase, gameStuff);
+        databaseHandler.initializeStructure(gameAssets, gameFirebase, gameInput, gameLogic, gameNetworked);
+        latencyHandler.initializeStructure(gameNetworked);
+        processedInputHandler.initializeStructure(gameFirebase, gameNetworked, gameStuff);
+        spawningHandler.initializeStructure(gameNetworked);
 
-        gameLogic.initializeStructure(cameraHelper, databaseHandler, latencyHandler, processedInputHandler);
+        gameLogic.initializeStructure(cameraHelper, databaseHandler, latencyHandler, processedInputHandler, spawningHandler);
         // Renderer
-        gameRenderer.initializeStructure(gameScreen, gameStuff);
+        gameRenderer.initializeStructure(gameNetworked, gameScreen, gameStuff);
         // Stuff
         gameStuff.initializeStructure(gameAssets);
         // Mandatory Initialization
@@ -55,6 +55,7 @@ public class GameInitializer extends ZoneInitializer {
         gameScreen.initCameras();
         gameRenderer.initRenderers();
         gameStuff.initStuff();
+        gameNetworked.initNetworked();
         gameInput.initConfig();
         gameLogic.initState();
         // Everything is Initialized, Time to Show the Zone

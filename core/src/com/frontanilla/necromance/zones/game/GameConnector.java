@@ -14,6 +14,7 @@ public class GameConnector extends ZoneConnector {
         initializer = new GameInitializer(this);
         input = new GameInput();
         logic = new GameLogic(sharedConnector.getSharedLogic());
+        networked = new GameNetworked();
         renderer = new GameRenderer();
         screen = new GameScreen(this);
         stuff = new GameStuff(sharedConnector.getSharedStuff());

@@ -20,7 +20,7 @@ public class Find {
         return null;
     }
 
-    public static DBPlayerDocument databasePlayerWithPhoneID(DelayedRemovalArray<DBPlayerDocument> databasePlayers) {
+    public static DBPlayerDocument databasePlayerWithThisPhoneID(DelayedRemovalArray<DBPlayerDocument> databasePlayers) {
         return databasePlayerWithPhoneID(NecromanceClient.instance.getPhoneID(), databasePlayers);
     }
 

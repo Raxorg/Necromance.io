@@ -13,8 +13,7 @@ public class GameStuff extends ZoneStuff {
     // Structure
     private GameAssets gameAssets;
     // Stuff
-    private DelayedRemovalArray<Human> players;
-    private PlayArea playArea;
+    private Map map;
     private Texture texture; // TODO TEST
 
     public GameStuff(SharedStuff sharedStuff) {
@@ -27,18 +26,12 @@ public class GameStuff extends ZoneStuff {
 
     @Override
     public void initStuff() {
-        players = new DelayedRemovalArray<>();
-        playArea = new PlayArea(1000, 1000, 1000, 1000, 25);
-        playArea.setTextureRegion(gameAssets.getPlayArea());
+        map = new Map(gameAssets.getPlayArea(), gameAssets.getHuman(), gameAssets.getSpawnPoint());
     }
 
     // Getters
-    public DelayedRemovalArray<Human> getHumanPlayers() {
-        return players;
-    }
-
-    public PlayArea getPlayArea() {
-        return playArea;
+    public Map getMap() {
+        return map;
     }
 
     // TODO TEST

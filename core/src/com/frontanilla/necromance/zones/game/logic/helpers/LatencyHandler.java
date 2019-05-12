@@ -2,18 +2,21 @@ package com.frontanilla.necromance.zones.game.logic.helpers;
 
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.helpers.Find;
+import com.frontanilla.necromance.zones.game.GameNetworked;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
+
+import static com.frontanilla.necromance.zones.game.GameConstants.MAX_ALLOWED_DELAY;
 
 public class LatencyHandler {
 
     // Structure
-    private GameStuff gameStuff;
+    private GameNetworked gameNetworked;
     // Logic
     private float movePlayerTime;
     private boolean movePlayerTimeStarted;
 
-    public void initializeStructure(GameStuff gameStuff) {
-        this.gameStuff = gameStuff;
+    public void initializeStructure(GameNetworked gameNetworked) {
+        this.gameNetworked = gameNetworked;
     }
 
     public void initState() {
@@ -24,8 +27,8 @@ public class LatencyHandler {
     public void update(float delta) {
         if (movePlayerTimeStarted) {
             movePlayerTime += delta;
-            if (movePlayerTime >= 1f) {
-                Human thisHuman = Find.humanWithPhoneID(gameStuff.getHumanPlayers());
+            if (movePlayerTime >= MAX_ALLOWED_DELAY) {
+                Human thisHuman = Find.humanWithPhoneID(gameNetworked.getHumanPlayers());
                 thisHuman.setUseOriginalColor(false);
             }
         }

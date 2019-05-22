@@ -2,7 +2,6 @@ package com.frontanilla.necromance.zones.game.logic.helpers;
 
 import com.badlogic.gdx.graphics.Color;
 import com.frontanilla.necromance.utils.helpers.Random;
-import com.frontanilla.necromance.zones.game.logic.GameLogic;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 import java.util.LinkedList;
@@ -13,7 +12,6 @@ import static com.frontanilla.necromance.zones.game.GameConstants.MESSAGE_DURATI
 public class MessageHandler {
 
     // Structure
-    private GameLogic gameLogic;
     private GameStuff gameStuff;
     // Logic
     private Queue<String> messageQueue;
@@ -21,10 +19,8 @@ public class MessageHandler {
     private boolean showingMessage;
 
     public void initializeStructure(
-            GameLogic gameLogic,
             GameStuff gameStuff
     ) {
-        this.gameLogic = gameLogic;
         this.gameStuff = gameStuff;
     }
 

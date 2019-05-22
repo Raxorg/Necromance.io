@@ -43,7 +43,7 @@ public class GameInitializer extends ZoneInitializer {
         cameraHelper.initializeStructure(gameScreen, gameStuff);
         databaseHandler.initializeStructure(gameAssets, gameFirebase, gameInput, gameLogic, gameNetworked);
         latencyHandler.initializeStructure(gameNetworked);
-        messageHandler.initializeStructure(gameLogic, gameStuff);
+        messageHandler.initializeStructure(gameStuff);
         processedInputHandler.initializeStructure(gameFirebase, gameLogic, gameNetworked, gameStuff);
         spawningHandler.initializeStructure(gameNetworked);
 

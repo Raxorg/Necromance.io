@@ -65,7 +65,7 @@ public class Human extends DBPlayerSubscriber {
         float nameBoxX = databasePlayer.getX() + HUMAN_SIZE / 2f - nameBox.getWidth() / 2f;
         float nameBoxY = databasePlayer.getY() + HUMAN_SIZE + nameBox.getTextHeight() / 3f;
         nameBox.setPosition(nameBoxX, nameBoxY);
-        nameBox.setColor(Transform.stringToColor(databasePlayer.getColor()));
+        nameBox.setBoxColor(Transform.stringToColor(databasePlayer.getColor()));
         // Character
         color = Transform.stringToColor(databasePlayer.getColor());
     }

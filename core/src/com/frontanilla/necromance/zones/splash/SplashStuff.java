@@ -53,7 +53,7 @@ public class SplashStuff extends ZoneStuff {
                 splashAssets.getTimesSquare(),
                 false);
         messageText.setText("Checking Game Version....");
-        messageText.setColor(Color.BLACK);
+        messageText.setFontColor(Color.BLACK);
     }
 
     // Getters

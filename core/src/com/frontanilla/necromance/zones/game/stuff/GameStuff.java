@@ -2,8 +2,6 @@ package com.frontanilla.necromance.zones.game.stuff;
 
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.utils.DelayedRemovalArray;
-import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.zones.foundations.ZoneStuff;
 import com.frontanilla.necromance.zones.game.GameAssets;
 import com.frontanilla.necromance.zones.shared.SharedStuff;
@@ -15,6 +13,7 @@ public class GameStuff extends ZoneStuff {
     // Stuff
     private Map map;
     private Texture texture; // TODO TEST
+    private NameBox messageBox;
 
     public GameStuff(SharedStuff sharedStuff) {
         super(sharedStuff);
@@ -27,6 +26,8 @@ public class GameStuff extends ZoneStuff {
     @Override
     public void initStuff() {
         map = new Map(gameAssets.getPlayArea(), gameAssets.getHuman(), gameAssets.getSpawnPoint());
+        messageBox = new NameBox(gameAssets.getFrozenNinePatch(), gameAssets.getTimesSquare());
+        messageBox.setPosition(1000, 1000);
     }
 
     // Getters
@@ -42,5 +43,9 @@ public class GameStuff extends ZoneStuff {
     public void assignTexture(Pixmap pixmap) {
         texture = new Texture(pixmap);
         //pixmap.dispose();
+    }
+
+    public NameBox getMessageBox() {
+        return messageBox;
     }
 }

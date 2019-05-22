@@ -15,7 +15,7 @@ public class AlignText extends Text {
 
     @Override
     public void render(SpriteBatch spriteBatch) {
-        font.setColor(color);
+        font.setColor(fontColor);
         font.draw(spriteBatch, text, bounds.x, bounds.y + (yUp ? 0 : -bounds.height), bounds.width, Align.center, true);
     }
 }

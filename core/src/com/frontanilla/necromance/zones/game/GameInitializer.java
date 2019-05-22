@@ -30,6 +30,7 @@ public class GameInitializer extends ZoneInitializer {
         CameraHelper cameraHelper = new CameraHelper();
         DatabaseHandler databaseHandler = new DatabaseHandler();
         LatencyHandler latencyHandler = new LatencyHandler();
+        MessageHandler messageHandler = new MessageHandler();
         ProcessedInputHandler processedInputHandler = new ProcessedInputHandler();
         SpawningHandler spawningHandler = new SpawningHandler();
         // Structure Initialization
@@ -42,10 +43,11 @@ public class GameInitializer extends ZoneInitializer {
         cameraHelper.initializeStructure(gameScreen, gameStuff);
         databaseHandler.initializeStructure(gameAssets, gameFirebase, gameInput, gameLogic, gameNetworked);
         latencyHandler.initializeStructure(gameNetworked);
-        processedInputHandler.initializeStructure(gameFirebase, gameNetworked, gameStuff);
+        messageHandler.initializeStructure(gameLogic, gameStuff);
+        processedInputHandler.initializeStructure(gameFirebase, gameLogic, gameNetworked, gameStuff);
         spawningHandler.initializeStructure(gameNetworked);
 
-        gameLogic.initializeStructure(cameraHelper, databaseHandler, latencyHandler, processedInputHandler, spawningHandler);
+        gameLogic.initializeStructure(cameraHelper, databaseHandler, latencyHandler, messageHandler, processedInputHandler, spawningHandler);
         // Renderer
         gameRenderer.initializeStructure(gameNetworked, gameScreen, gameStuff);
         // Stuff

@@ -16,7 +16,7 @@ public class NameBox {
     private Rectangle bounds;
     private float margin;
     private TextureRegion topLeft, top, topRight, right, bottomRight, bottom, bottomLeft, left, center;
-    private Color color;
+    private Color boxColor, fontColor;
     // Text
     private BitmapFont font;
     private String text;
@@ -36,14 +36,15 @@ public class NameBox {
         bottomLeft = new TextureRegion(ninePatch, 0, 52, 12, 12);
         left = new TextureRegion(ninePatch, 0, 10, 12, 42);
         center = new TextureRegion(ninePatch, 12, 10, 42, 42);
-        color = Color.WHITE;
+        boxColor = Color.WHITE;
+        fontColor = Color.BLACK;
         // Text
         this.font = font;
         text = "";
     }
 
     public void render(SpriteBatch spriteBatch) {
-        spriteBatch.setColor(color);
+        spriteBatch.setColor(boxColor);
         spriteBatch.draw(topLeft, bounds.x, bounds.y + bounds.height - margin, margin, margin);
         spriteBatch.draw(top, bounds.x + margin, bounds.y + bounds.height - margin, bounds.width - 2 * margin, margin);
         spriteBatch.draw(topRight, bounds.x + bounds.width - margin, bounds.y + bounds.height - margin, margin, margin);
@@ -53,7 +54,7 @@ public class NameBox {
         spriteBatch.draw(bottomLeft, bounds.x, bounds.y, margin, margin);
         spriteBatch.draw(left, bounds.x, bounds.y + margin, margin, bounds.height - 2 * margin);
         spriteBatch.draw(center, bounds.x + margin, bounds.y + margin, bounds.width - 2 * margin, bounds.height - 2 * margin);
-        font.setColor(Color.BLACK);
+        font.setColor(fontColor);
         font.draw(
                 spriteBatch,
                 text,
@@ -82,8 +83,12 @@ public class NameBox {
         return bounds.width;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setBoxColor(Color boxColor) {
+        this.boxColor = boxColor;
+    }
+
+    public void setFontColor(Color fontColor) {
+        this.fontColor = fontColor;
     }
 
     public void setText(String text) {

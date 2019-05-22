@@ -44,4 +44,9 @@ public class GameInput extends ZoneInput {
         gameLogic.getProcessedInputHandler().touchDownOnEmptySpace((int) unprojected.x, (int) unprojected.y);
         return false;
     }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        return super.keyUp(keycode);
+    }
 }

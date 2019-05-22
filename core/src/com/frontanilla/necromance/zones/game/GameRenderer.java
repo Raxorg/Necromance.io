@@ -48,6 +48,8 @@ public class GameRenderer extends ZoneRenderer {
             spriteBatch.setColor(Color.WHITE);
             spriteBatch.draw(gameStuff.getTexture(), 1500, 1500);
         }
+
+        gameStuff.getMessageBox().render(spriteBatch);
         spriteBatch.end();
     }
 }

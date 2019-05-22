@@ -10,6 +10,7 @@ public class GameLogic extends ZoneLogic {
     private CameraHelper cameraHelper;
     private DatabaseHandler databaseHandler;
     private LatencyHandler latencyHandler;
+    private MessageHandler messageHandler;
     private ProcessedInputHandler processedInputHandler;
     private SpawningHandler spawningHandler;
 
@@ -21,11 +22,13 @@ public class GameLogic extends ZoneLogic {
             CameraHelper cameraHelper,
             DatabaseHandler databaseHandler,
             LatencyHandler latencyHandler,
+            MessageHandler messageHandler,
             ProcessedInputHandler processedInputHandler,
             SpawningHandler spawningHandler) {
         this.cameraHelper = cameraHelper;
         this.databaseHandler = databaseHandler;
         this.latencyHandler = latencyHandler;
+        this.messageHandler = messageHandler;
         this.processedInputHandler = processedInputHandler;
         this.spawningHandler = spawningHandler;
     }
@@ -35,6 +38,7 @@ public class GameLogic extends ZoneLogic {
         cameraHelper.initState();
         databaseHandler.initState();
         latencyHandler.initState();
+        messageHandler.initState();
         processedInputHandler.initState();
         spawningHandler.initState();
     }
@@ -42,6 +46,7 @@ public class GameLogic extends ZoneLogic {
     @Override
     public void update(float delta) {
         latencyHandler.update(delta);
+        messageHandler.update(delta);
     }
 
     // Getters
@@ -51,6 +56,10 @@ public class GameLogic extends ZoneLogic {
 
     public LatencyHandler getLatencyHandler() {
         return latencyHandler;
+    }
+
+    public MessageHandler getMessageHandler() {
+        return messageHandler;
     }
 
     public ProcessedInputHandler getProcessedInputHandler() {

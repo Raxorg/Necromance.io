@@ -4,12 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.frontanilla.necromance.core.NecromanceClient;
+import com.frontanilla.necromance.database.clone.DBPlayerDocument;
 import com.frontanilla.necromance.database.representation.Human;
 import com.frontanilla.necromance.utils.advanced.DataListener;
 import com.frontanilla.necromance.utils.helpers.Find;
 import com.frontanilla.necromance.utils.helpers.Validate;
 import com.frontanilla.necromance.zones.game.GameFirebase;
 import com.frontanilla.necromance.zones.game.GameNetworked;
+import com.frontanilla.necromance.zones.game.logic.GameLogic;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 import static com.frontanilla.necromance.zones.game.GameConstants.HUMAN_SIZE;
@@ -18,6 +20,7 @@ public class ProcessedInputHandler {
 
     // Structure
     private GameFirebase gameFirebase;
+    private GameLogic gameLogic;
     private GameNetworked gameNetworked;
     private GameStuff gameStuff;
     // Logic
@@ -25,9 +28,11 @@ public class ProcessedInputHandler {
 
     public void initializeStructure(
             GameFirebase gameFirebase,
+            GameLogic gameLogic,
             GameNetworked gameNetworked,
             GameStuff gameStuff) {
         this.gameFirebase = gameFirebase;
+        this.gameLogic = gameLogic;
         this.gameNetworked = gameNetworked;
         this.gameStuff = gameStuff;
     }
@@ -88,6 +93,11 @@ public class ProcessedInputHandler {
     }
 
     public void touchDownOnEmptySpace(int x, int y) {
-        gameFirebase.movePlayer((int) (x - HUMAN_SIZE / 2), (int) (y - HUMAN_SIZE / 2));
+        DBPlayerDocument thisPlayer = Find.databasePlayerWithThisPhoneID(gameStuff.getSharedStuff().getDatabaseClone().getPlayers());
+        if (thisPlayer != null) {
+            gameFirebase.movePlayer((int) (x - HUMAN_SIZE / 2), (int) (y - HUMAN_SIZE / 2));
+        } else {
+            gameLogic.getMessageHandler().addMessage("You have not spawned yet");
+        }
     }
 }

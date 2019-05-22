@@ -15,7 +15,7 @@ public class Text {
     protected Rectangle bounds;
     protected BitmapFont font;
     protected String text;
-    protected Color color;
+    protected Color fontColor;
 
     public Text(float x, float y, float w, BitmapFont font) {
         bounds = new Rectangle(x, y, w, TextUtils.getTextHeight(ALPHABET, font));
@@ -23,7 +23,7 @@ public class Text {
     }
 
     public void render(SpriteBatch spriteBatch) {
-        font.setColor(color);
+        font.setColor(fontColor);
         font.draw(spriteBatch, text, bounds.x, bounds.y + bounds.height / 2f, bounds.width, Align.center, true);
     }
 
@@ -35,7 +35,7 @@ public class Text {
         this.text = text;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setFontColor(Color fontColor) {
+        this.fontColor = fontColor;
     }
 }

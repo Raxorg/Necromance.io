@@ -7,6 +7,8 @@ public class GameConstants {
     public static final String GAME_ATLAS_FILE = "images/game/gameAtlas.png";
     // Logic
     public static final float MAX_ALLOWED_DELAY = 0.5f;
+
+    public static final float MESSAGE_DURATION = 3f;
     // Screen
     public static final int CAMERA_HEIGHT = 1000;
     // Stuff

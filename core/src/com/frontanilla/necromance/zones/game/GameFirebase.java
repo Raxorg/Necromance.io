@@ -44,8 +44,8 @@ public class GameFirebase extends ZoneFirebase {
         });
     }
 
-    public void addPlayer() {
-        sharedFirebase.addPlayer(new OnResultListener() {
+    public void addThisPlayer() {
+        sharedFirebase.addThisPlayer(new OnResultListener() {
             @Override
             public void onResult(boolean success) {
                 System.out.println("Success Adding Player: " + success);
@@ -53,8 +53,12 @@ public class GameFirebase extends ZoneFirebase {
         });
     }
 
-    public void movePlayer(int x, int y) {
-        sharedFirebase.movePlayer(x, y, new OnResultListener() {
+    public void addTestPlayer(String fakePhoneID, OnResultListener resultListener) {
+        sharedFirebase.addTestPlayer(fakePhoneID, resultListener);
+    }
+
+    public void moveThisPlayer(int x, int y) {
+        sharedFirebase.moveThisPlayer(x, y, new OnResultListener() {
             @Override
             public void onResult(boolean success) {
                 System.out.println("Success Moving Player: " + success);
@@ -68,6 +72,15 @@ public class GameFirebase extends ZoneFirebase {
             @Override
             public void stopTime() {
                 gameLogic.getLatencyHandler().onMovePlayerStopTime();
+            }
+        });
+    }
+
+    public void moveTestPlayer(String fakePhoneID, int x, int y) {
+        sharedFirebase.moveTestPlayer(fakePhoneID, x, y, new OnResultListener() {
+            @Override
+            public void onResult(boolean success) {
+                System.out.println("Success moving test player: " + success);
             }
         });
     }

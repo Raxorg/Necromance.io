@@ -60,21 +60,17 @@ public class FakeDatabase {
         if (existentPlayerIndex != -1) {
             playerData.set(existentPlayerIndex, value);
         } else {
-            addPlayerDocument(value);
+            playerData.add(value);
         }
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                onResultListener.onResult(true);
                 if (playerDataListener != null) {
                     playerDataListener.onDataFetched(buildPlayerDocumentArray());
                 }
+                onResultListener.onResult(true);
             }
         }, FAKE_RESPONSE_DELAY);
-    }
-
-    private void addPlayerDocument(String value) {
-        playerData.add(value);
     }
 
     private DelayedRemovalArray<DBPlayerDocument> buildPlayerDocumentArray() {

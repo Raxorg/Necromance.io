@@ -27,7 +27,7 @@ public class LatencyHandler {
         if (movePlayerTimeStarted) {
             movePlayerTime += delta;
             if (movePlayerTime >= MAX_ALLOWED_DELAY) {
-                Human thisHuman = Find.humanWithPhoneID(gameNetworked.getHumanPlayers());
+                Human thisHuman = Find.humanWithThisPhoneID(gameNetworked.getHumanPlayers());
                 thisHuman.setUseOriginalColor(false);
             }
         }
@@ -41,7 +41,7 @@ public class LatencyHandler {
     public void onMovePlayerStopTime() {
         movePlayerTime = 0;
         movePlayerTimeStarted = false;
-        Human thisHuman = Find.humanWithPhoneID(gameNetworked.getHumanPlayers());
+        Human thisHuman = Find.humanWithThisPhoneID(gameNetworked.getHumanPlayers());
         thisHuman.setUseOriginalColor(true);
     }
 }

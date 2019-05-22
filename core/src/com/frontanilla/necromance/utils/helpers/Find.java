@@ -7,7 +7,7 @@ import com.frontanilla.necromance.database.representation.Human;
 
 public class Find {
 
-    public static Human humanWithPhoneID(DelayedRemovalArray<Human> humans) {
+    public static Human humanWithThisPhoneID(DelayedRemovalArray<Human> humans) {
         return humanWithPhoneID(NecromanceClient.instance.getPhoneID(), humans);
     }
 

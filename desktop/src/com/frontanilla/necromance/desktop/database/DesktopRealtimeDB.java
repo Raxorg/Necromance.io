@@ -35,12 +35,12 @@ public class DesktopRealtimeDB implements RealtimeDBInterface {
     }
 
     @Override
-    public void movePlayer(DBPlayerDocument thisPlayer, int x, int y, OnResultListener onResultListener) {
-        String newValue = thisPlayer.getPlayerID() + "," +
-                thisPlayer.getName() + "," +
+    public void movePlayer(DBPlayerDocument playerDocument, int x, int y, OnResultListener onResultListener) {
+        String newValue = playerDocument.getPlayerID() + "," +
+                playerDocument.getName() + "," +
                 x + "," +
                 y + "," +
-                thisPlayer.getColor();
+                playerDocument.getColor();
         fakeDatabase.setPlayer(newValue, onResultListener);
     }
 

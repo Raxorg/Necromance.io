@@ -56,10 +56,10 @@ public class DatabaseHandler {
             gameNetworked.getHumanPlayers().add(newHuman);
         }
         // Add to Database or Restore Color of This Player
-        Human thisPlayer = Find.humanWithPhoneID(gameNetworked.getHumanPlayers());
+        Human thisPlayer = Find.humanWithThisPhoneID(gameNetworked.getHumanPlayers());
         if (thisPlayer == null) {
             // This Player is not in the Database, Add it
-            gameFirebase.addPlayer();
+            gameFirebase.addThisPlayer();
         } else {
             // This Player is in the Database, Restore its Color
             if (gameLogic.getSharedLogic().isMovingPlayer()) {

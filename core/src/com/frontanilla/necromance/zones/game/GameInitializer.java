@@ -49,7 +49,7 @@ public class GameInitializer extends ZoneInitializer {
         messageHandler.initializeStructure(gameStuff);
         processedInputHandler.initializeStructure(gameFirebase, gameLogic, gameNetworked, gameStuff);
         spawningHandler.initializeStructure(gameNetworked);
-        enemyHandler.initializeStructure(gameNetworked);
+        enemyHandler.initializeStructure(gameFirebase, gameNetworked);
 
         gameLogic.initializeStructure(
                 cameraHandler, databaseHandler, latencyHandler, messageHandler, processedInputHandler, spawningHandler,

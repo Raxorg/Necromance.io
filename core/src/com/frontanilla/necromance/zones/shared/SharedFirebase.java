@@ -62,14 +62,18 @@ public class SharedFirebase {
     //---------------
     // Player Adding
     //---------------
-    public void addPlayer(OnResultListener listener) {
+    public void addThisPlayer(OnResultListener listener) {
         NecromanceClient.instance.getRealtimeDBInterface().addPlayer(NecromanceClient.instance.getPhoneID(), listener);
+    }
+
+    public void addTestPlayer(String fakePhoneID, OnResultListener listener) {
+        NecromanceClient.instance.getRealtimeDBInterface().addPlayer(fakePhoneID, listener);
     }
 
     //---------------
     // Player Moving
     //---------------
-    public void movePlayer(int x, int y, final OnResultListener onResultListener, final TimerListener timerListener) {
+    public void moveThisPlayer(int x, int y, final OnResultListener onResultListener, final TimerListener timerListener) {
         if (!sharedLogic.isMovingPlayer()) {
             sharedLogic.setMovingPlayer(true);
             timerListener.startTime();
@@ -85,6 +89,16 @@ public class SharedFirebase {
         } else {
             System.out.println("THE PLAYER IS BEING MOVED, PLEASE WAIT");
         }
+    }
+
+    public void moveTestPlayer(String fakePhoneID, int x, int y, final OnResultListener onResultListener) {
+        DBPlayerDocument testPlayer = Find.databasePlayerWithPhoneID(fakePhoneID, sharedStuff.getDatabaseClone().getPlayers());
+        NecromanceClient.instance.getRealtimeDBInterface().movePlayer(testPlayer, x, y, new OnResultListener() {
+            @Override
+            public void onResult(boolean success) {
+                onResultListener.onResult(success);
+            }
+        });
     }
 
     //----------------------

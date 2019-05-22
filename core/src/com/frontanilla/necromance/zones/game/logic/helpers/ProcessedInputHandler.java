@@ -42,7 +42,7 @@ public class ProcessedInputHandler {
     }
 
     public void touchDownOnHumanPlayer(Human humanPlayer) {
-        if (humanPlayer.equals(Find.humanWithPhoneID(gameNetworked.getHumanPlayers()))) {
+        if (humanPlayer.equals(Find.humanWithThisPhoneID(gameNetworked.getHumanPlayers()))) {
             Gdx.input.getTextInput(new Input.TextInputListener() {
                 @Override
                 public void input(String userText) {
@@ -95,7 +95,7 @@ public class ProcessedInputHandler {
     public void touchDownOnEmptySpace(int x, int y) {
         DBPlayerDocument thisPlayer = Find.databasePlayerWithThisPhoneID(gameStuff.getSharedStuff().getDatabaseClone().getPlayers());
         if (thisPlayer != null) {
-            gameFirebase.movePlayer((int) (x - HUMAN_SIZE / 2), (int) (y - HUMAN_SIZE / 2));
+            gameFirebase.moveThisPlayer((int) (x - HUMAN_SIZE / 2), (int) (y - HUMAN_SIZE / 2));
         } else {
             gameLogic.getMessageHandler().addMessage("You have not spawned yet");
         }

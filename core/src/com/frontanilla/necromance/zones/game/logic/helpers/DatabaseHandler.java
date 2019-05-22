@@ -41,11 +41,6 @@ public class DatabaseHandler {
 
 
     public void onPlayersFetched(DelayedRemovalArray<DBPlayerDocument> databasePlayers) {
-        // Enable Input at the First Time Receiving PLayers
-        if (!initialPlayersFetched) {
-            gameInput.setEnabled(true);
-            initialPlayersFetched = true;
-        }
         // Add or Update Fetched Players
         DB:
         for (int i = 0; i < databasePlayers.size; i++) {
@@ -70,6 +65,11 @@ public class DatabaseHandler {
             if (gameLogic.getSharedLogic().isMovingPlayer()) {
                 thisPlayer.setUseOriginalColor(true);
             }
+        }
+        // Enable Input at the First Time Receiving PLayers
+        if (!initialPlayersFetched) {
+            gameInput.setEnabled(true);
+            initialPlayersFetched = true;
         }
     }
 }

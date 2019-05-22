@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.necromance.zones.game.GameScreen;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
-public class CameraHelper {
+public class CameraHandler {
 
     private GameScreen gameScreen;
     private GameStuff gameStuff;

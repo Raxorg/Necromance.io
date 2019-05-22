@@ -8,7 +8,7 @@ import com.frontanilla.necromance.zones.shared.SharedLogic;
 public class GameLogic extends ZoneLogic {
 
     // Structure
-    private CameraHelper cameraHelper;
+    private CameraHandler cameraHandler;
     private DatabaseHandler databaseHandler;
     private LatencyHandler latencyHandler;
     private MessageHandler messageHandler;
@@ -22,14 +22,14 @@ public class GameLogic extends ZoneLogic {
     }
 
     public void initializeStructure(
-            CameraHelper cameraHelper,
+            CameraHandler cameraHandler,
             DatabaseHandler databaseHandler,
             LatencyHandler latencyHandler,
             MessageHandler messageHandler,
             ProcessedInputHandler processedInputHandler,
             SpawningHandler spawningHandler,
             EnemyHandler enemyHandler) {
-        this.cameraHelper = cameraHelper;
+        this.cameraHandler = cameraHandler;
         this.databaseHandler = databaseHandler;
         this.latencyHandler = latencyHandler;
         this.messageHandler = messageHandler;
@@ -40,7 +40,7 @@ public class GameLogic extends ZoneLogic {
 
     @Override
     public void initState() {
-        cameraHelper.initState();
+        cameraHandler.initState();
         databaseHandler.initState();
         latencyHandler.initState();
         messageHandler.initState();

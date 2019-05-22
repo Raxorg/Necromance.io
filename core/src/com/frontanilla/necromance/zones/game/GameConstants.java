@@ -9,6 +9,7 @@ public class GameConstants {
     public static final float MAX_ALLOWED_DELAY = 0.5f;
 
     public static final float MESSAGE_DURATION = 3f;
+    public static final float MESSAGE_FADING_DURATION = 1f;
     // Screen
     public static final int CAMERA_HEIGHT = 1000;
     // Stuff

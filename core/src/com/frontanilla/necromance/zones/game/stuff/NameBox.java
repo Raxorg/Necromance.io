@@ -83,8 +83,16 @@ public class NameBox {
         return bounds.width;
     }
 
+    public Color getBoxColor() {
+        return boxColor;
+    }
+
     public void setBoxColor(Color boxColor) {
         this.boxColor = boxColor;
+    }
+
+    public Color getFontColor() {
+        return fontColor;
     }
 
     public void setFontColor(Color fontColor) {

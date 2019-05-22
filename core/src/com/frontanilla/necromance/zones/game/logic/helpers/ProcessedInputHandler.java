@@ -100,4 +100,8 @@ public class ProcessedInputHandler {
             gameLogic.getMessageHandler().addMessage("You have not spawned yet");
         }
     }
+
+    public void spaceKeyUp() {
+        gameLogic.getEnemyHandler().spawnEnemy();
+    }
 }

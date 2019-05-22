@@ -2,6 +2,7 @@ package com.frontanilla.necromance.zones.game.logic;
 
 import com.frontanilla.necromance.zones.foundations.ZoneLogic;
 import com.frontanilla.necromance.zones.game.logic.helpers.*;
+import com.frontanilla.necromance.zones.game.logic.testing.EnemyHandler;
 import com.frontanilla.necromance.zones.shared.SharedLogic;
 
 public class GameLogic extends ZoneLogic {
@@ -13,6 +14,8 @@ public class GameLogic extends ZoneLogic {
     private MessageHandler messageHandler;
     private ProcessedInputHandler processedInputHandler;
     private SpawningHandler spawningHandler;
+    // Testing
+    private EnemyHandler enemyHandler;
 
     public GameLogic(SharedLogic sharedLogic) {
         super(sharedLogic);
@@ -24,13 +27,15 @@ public class GameLogic extends ZoneLogic {
             LatencyHandler latencyHandler,
             MessageHandler messageHandler,
             ProcessedInputHandler processedInputHandler,
-            SpawningHandler spawningHandler) {
+            SpawningHandler spawningHandler,
+            EnemyHandler enemyHandler) {
         this.cameraHelper = cameraHelper;
         this.databaseHandler = databaseHandler;
         this.latencyHandler = latencyHandler;
         this.messageHandler = messageHandler;
         this.processedInputHandler = processedInputHandler;
         this.spawningHandler = spawningHandler;
+        this.enemyHandler = enemyHandler;
     }
 
     @Override
@@ -64,5 +69,9 @@ public class GameLogic extends ZoneLogic {
 
     public ProcessedInputHandler getProcessedInputHandler() {
         return processedInputHandler;
+    }
+
+    public EnemyHandler getEnemyHandler() {
+        return enemyHandler;
     }
 }

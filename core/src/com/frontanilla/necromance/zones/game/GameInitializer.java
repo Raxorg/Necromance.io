@@ -5,6 +5,7 @@ import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.foundations.ZoneInitializer;
 import com.frontanilla.necromance.zones.game.logic.GameLogic;
 import com.frontanilla.necromance.zones.game.logic.helpers.*;
+import com.frontanilla.necromance.zones.game.logic.testing.EnemyHandler;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
 public class GameInitializer extends ZoneInitializer {
@@ -33,6 +34,8 @@ public class GameInitializer extends ZoneInitializer {
         MessageHandler messageHandler = new MessageHandler();
         ProcessedInputHandler processedInputHandler = new ProcessedInputHandler();
         SpawningHandler spawningHandler = new SpawningHandler();
+
+        EnemyHandler enemyHandler = new EnemyHandler();
         // Structure Initialization
         //--------------------------
         // Firebase
@@ -46,8 +49,11 @@ public class GameInitializer extends ZoneInitializer {
         messageHandler.initializeStructure(gameStuff);
         processedInputHandler.initializeStructure(gameFirebase, gameLogic, gameNetworked, gameStuff);
         spawningHandler.initializeStructure(gameNetworked);
+        enemyHandler.initializeStructure(gameNetworked);
 
-        gameLogic.initializeStructure(cameraHelper, databaseHandler, latencyHandler, messageHandler, processedInputHandler, spawningHandler);
+        gameLogic.initializeStructure(
+                cameraHelper, databaseHandler, latencyHandler, messageHandler, processedInputHandler, spawningHandler,
+                enemyHandler);
         // Renderer
         gameRenderer.initializeStructure(gameNetworked, gameScreen, gameStuff);
         // Stuff

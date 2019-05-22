@@ -1,6 +1,7 @@
 package com.frontanilla.necromance.zones.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.DelayedRemovalArray;
 import com.frontanilla.necromance.database.representation.Human;
@@ -47,6 +48,12 @@ public class GameInput extends ZoneInput {
 
     @Override
     public boolean keyUp(int keycode) {
-        return super.keyUp(keycode);
+        if (!enabled) {
+            return false;
+        }
+        if (keycode == Input.Keys.SPACE) {
+            gameLogic.getProcessedInputHandler().spaceKeyUp();
+        }
+        return true;
     }
 }

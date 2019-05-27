@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.frontanilla.necromance.database.clone.DBPlayerDocument;
 import com.frontanilla.necromance.database.subscribers.DBPlayerSubscriber;
@@ -39,6 +40,10 @@ public class Human extends DBPlayerSubscriber {
             spriteBatch.setColor(color.cpy().lerp(Color.BLACK, 0.5f));
         }
         spriteBatch.draw(textureRegion, databasePlayer.getX(), databasePlayer.getY(), HUMAN_SIZE, HUMAN_SIZE);
+    }
+
+    public void renderDebug(ShapeRenderer shapeRenderer) {
+        nameBox.renderDebug(shapeRenderer);
     }
 
     public boolean contains(float x, float y) {

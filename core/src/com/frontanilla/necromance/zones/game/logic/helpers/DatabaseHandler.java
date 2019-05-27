@@ -52,7 +52,7 @@ public class DatabaseHandler {
                 }
             }
             Human newHuman = new Human(databasePlayers.get(i), gameAssets.getFrozenNinePatch(), gameAssets.getTimesSquare());
-            newHuman.setTextureRegion(gameAssets.getHuman());
+            newHuman.setTextureRegion(gameAssets.getNecromancerDoctor());
             gameNetworked.getHumanPlayers().add(newHuman);
         }
         // Add to Database or Restore Color of This Player

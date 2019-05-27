@@ -5,6 +5,7 @@ public class GameConstants {
     // Assets
     public static final String TIMES_SQUARE_FILE = "fonts/timesSquare.fnt";
     public static final String GAME_ATLAS_FILE = "images/game/gameAtlas.png";
+    public static final String CHARACTER_ATLAS_FILE = "images/game/characterAtlas.png";
     // Logic
     public static final float MAX_ALLOWED_DELAY = 0.5f;
 

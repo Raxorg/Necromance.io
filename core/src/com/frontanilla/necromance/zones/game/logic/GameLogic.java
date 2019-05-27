@@ -35,6 +35,7 @@ public class GameLogic extends ZoneLogic {
         this.messageHandler = messageHandler;
         this.processedInputHandler = processedInputHandler;
         this.spawningHandler = spawningHandler;
+
         this.enemyHandler = enemyHandler;
     }
 
@@ -52,6 +53,8 @@ public class GameLogic extends ZoneLogic {
     public void update(float delta) {
         latencyHandler.update(delta);
         messageHandler.update(delta);
+
+        enemyHandler.update(delta);
     }
 
     // Getters

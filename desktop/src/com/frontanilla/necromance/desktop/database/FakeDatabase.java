@@ -62,6 +62,18 @@ public class FakeDatabase {
         } else {
             playerData.add(value);
         }
+        instantResult(onResultListener);
+        //delayResult(onResultListener);
+    }
+
+    private void instantResult(OnResultListener onResultListener) {
+        if (playerDataListener != null) {
+            playerDataListener.onDataFetched(buildPlayerDocumentArray());
+        }
+        onResultListener.onResult(true);
+    }
+
+    private void delayResult(OnResultListener onResultListener) {
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {

@@ -10,6 +10,8 @@ public class GameConstants {
 
     public static final float MESSAGE_DURATION = 3f;
     public static final float MESSAGE_FADING_DURATION = 1f;
+
+    public static final float ENEMY_MOVE_INTERVAL = 1f;
     // Screen
     public static final int CAMERA_HEIGHT = 1000;
     // Stuff

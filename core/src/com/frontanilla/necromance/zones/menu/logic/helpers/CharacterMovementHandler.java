@@ -113,4 +113,9 @@ public class CharacterMovementHandler {
         flippingTime = 0.5f;
         flipped = false;
     }
+
+    // Setter
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
 }

@@ -63,6 +63,10 @@ public class MenuLogic extends ZoneLogic {
         return buttonHandler;
     }
 
+    public CharacterMovementHandler getCharacterMovementHandler() {
+        return characterMovementHandler;
+    }
+
     public CharacterSelectionHandler getCharacterSelectionHandler() {
         return characterSelectionHandler;
     }

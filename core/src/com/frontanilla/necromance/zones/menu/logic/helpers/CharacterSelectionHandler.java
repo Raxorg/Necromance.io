@@ -2,19 +2,23 @@ package com.frontanilla.necromance.zones.menu.logic.helpers;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.frontanilla.necromance.zones.menu.MenuScreen;
+import com.frontanilla.necromance.zones.menu.logic.MenuLogic;
 import com.frontanilla.necromance.zones.menu.stuff.MenuStuff;
 
 public class CharacterSelectionHandler {
 
+    private MenuLogic menuLogic;
     private MenuScreen menuScreen;
     private MenuStuff menuStuff;
     // Logic
     private boolean zoomingIn, zoomingOut, zoomedIn;
 
     public void initializeStructure(
+            MenuLogic menuLogic,
             MenuScreen menuScreen,
             MenuStuff menuStuff
     ) {
+        this.menuLogic = menuLogic;
         this.menuScreen = menuScreen;
         this.menuStuff = menuStuff;
     }
@@ -48,11 +52,13 @@ public class CharacterSelectionHandler {
     }
 
     private void zoomIn() {
-        // TODO: Calculate where to zoom in
+        // TODO: Calculate where to zoom, how to zoom etc, maybe use interpolation
+        menuLogic.getCharacterMovementHandler().setMoving(false);
         zoomingIn = true;
     }
 
     private void zoomOut() {
+        menuLogic.getCharacterMovementHandler().setMoving(true);
         zoomingOut = true;
     }
 

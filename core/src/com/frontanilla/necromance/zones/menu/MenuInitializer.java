@@ -52,7 +52,7 @@ public class MenuInitializer extends ZoneInitializer {
         audioHandler.initializeStructure(menuAssets);
         buttonHandler.initializeStructure(menuLogic, menuStuff);
         characterMovementHandler.initializeStructure(menuStuff);
-        characterSelectionHandler.initializeStructure(menuScreen, menuStuff);
+        characterSelectionHandler.initializeStructure(menuLogic, menuScreen, menuStuff);
         gameAssetsHandler.initializeStructure(menuAssets, menuConnector);
         processedInputHandler.initializeStructure(menuLogic, menuStuff);
         transitionHandler.initializeStructure(menuInput, menuLogic, menuStuff);

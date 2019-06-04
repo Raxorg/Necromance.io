@@ -1,15 +1,15 @@
 package com.frontanilla.necromance.zones.menu;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.frontanilla.necromance.zones.foundations.ZoneConnector;
 import com.frontanilla.necromance.zones.foundations.ZoneScreen;
 
 import static com.frontanilla.necromance.zones.menu.MenuConstants.CAMERA_HEIGHT;
+import static com.frontanilla.necromance.zones.menu.MenuConstants.CAMERA_WIDTH;
 
 public class MenuScreen extends ZoneScreen {
 
-    private OrthographicCamera staticCamera;
+    private OrthographicCamera camera;
 
     public MenuScreen(ZoneConnector connector) {
         super(connector);
@@ -17,16 +17,15 @@ public class MenuScreen extends ZoneScreen {
 
     @Override
     public void initCameras() {
-        float ratio = (float) Gdx.graphics.getWidth() / (float) Gdx.graphics.getHeight();
-        staticCamera = new OrthographicCamera();
-        staticCamera.setToOrtho(
+        camera = new OrthographicCamera();
+        camera.setToOrtho(
                 false,
-                CAMERA_HEIGHT * ratio,
+                CAMERA_WIDTH,
                 CAMERA_HEIGHT
         );
     }
 
-    public OrthographicCamera getStaticCamera() {
-        return staticCamera;
+    public OrthographicCamera getCamera() {
+        return camera;
     }
 }

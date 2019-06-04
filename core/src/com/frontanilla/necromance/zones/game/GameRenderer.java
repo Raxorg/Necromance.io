@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.frontanilla.necromance.zones.foundations.ZoneRenderer;
 import com.frontanilla.necromance.zones.game.stuff.GameStuff;
 
@@ -15,6 +16,7 @@ public class GameRenderer extends ZoneRenderer {
     private GameStuff gameStuff;
     // Rendering
     private SpriteBatch spriteBatch;
+    private ShapeRenderer shapeRenderer;
 
     public void initializeStructure(
             GameNetworked gameNetworked,
@@ -28,6 +30,8 @@ public class GameRenderer extends ZoneRenderer {
     @Override
     public void initRenderers() {
         spriteBatch = new SpriteBatch();
+        shapeRenderer = new ShapeRenderer();
+        shapeRenderer.setAutoShapeType(true);
     }
 
     @Override
@@ -35,6 +39,11 @@ public class GameRenderer extends ZoneRenderer {
         // Clear Previous Frame
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        renderStuff();
+        renderDebugStuff();
+    }
+
+    private void renderStuff() {
         // Use the Camera
         spriteBatch.setProjectionMatrix(gameScreen.getStaticCamera().combined);
         // Render Stuff
@@ -51,5 +60,13 @@ public class GameRenderer extends ZoneRenderer {
 
         gameStuff.getMessageBox().render(spriteBatch);
         spriteBatch.end();
+    }
+
+    private void renderDebugStuff() {
+        // Use the camera
+        shapeRenderer.setProjectionMatrix(gameScreen.getStaticCamera().combined);
+        shapeRenderer.begin();
+        // TODO
+        shapeRenderer.end();
     }
 }

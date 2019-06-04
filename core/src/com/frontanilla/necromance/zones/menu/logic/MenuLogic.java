@@ -9,7 +9,10 @@ public class MenuLogic extends ZoneLogic {
     // Structure
     private AudioHandler audioHandler;
     private ButtonHandler buttonHandler;
+    private CharacterMovementHandler characterMovementHandler;
+    private CharacterSelectionHandler characterSelectionHandler;
     private GameAssetsHandler gameAssetsHandler;
+    private ProcessedInputHandler processedInputHandler;
     private TransitionHandler transitionHandler;
     private WheelMenuHandler wheelMenuHandler;
 
@@ -20,12 +23,18 @@ public class MenuLogic extends ZoneLogic {
     public void initializeStructure(
             AudioHandler audioHandler,
             ButtonHandler buttonHandler,
+            CharacterMovementHandler characterMovementHandler,
+            CharacterSelectionHandler characterSelectionHandler,
             GameAssetsHandler gameAssetsHandler,
+            ProcessedInputHandler processedInputHandler,
             TransitionHandler transitionHandler,
             WheelMenuHandler wheelMenuHandler) {
         this.audioHandler = audioHandler;
         this.buttonHandler = buttonHandler;
+        this.characterMovementHandler = characterMovementHandler;
+        this.characterSelectionHandler = characterSelectionHandler;
         this.gameAssetsHandler = gameAssetsHandler;
+        this.processedInputHandler = processedInputHandler;
         this.transitionHandler = transitionHandler;
         this.wheelMenuHandler = wheelMenuHandler;
     }
@@ -34,12 +43,16 @@ public class MenuLogic extends ZoneLogic {
     public void initState() {
         audioHandler.initState();
         buttonHandler.initState();
+        characterMovementHandler.initState();
+        characterSelectionHandler.initState();
         transitionHandler.initState();
         wheelMenuHandler.initState();
     }
 
     @Override
     public void update(float delta) {
+        characterMovementHandler.update(delta);
+        characterSelectionHandler.update(delta);
         gameAssetsHandler.update();
         transitionHandler.update(delta);
         wheelMenuHandler.update(delta);
@@ -50,8 +63,16 @@ public class MenuLogic extends ZoneLogic {
         return buttonHandler;
     }
 
+    public CharacterSelectionHandler getCharacterSelectionHandler() {
+        return characterSelectionHandler;
+    }
+
     public GameAssetsHandler getGameAssetsHandler() {
         return gameAssetsHandler;
+    }
+
+    public ProcessedInputHandler getProcessedInputHandler() {
+        return processedInputHandler;
     }
 
     public TransitionHandler getTransitionHandler() {

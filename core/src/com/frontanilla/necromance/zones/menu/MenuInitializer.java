@@ -35,7 +35,10 @@ public class MenuInitializer extends ZoneInitializer {
         // Logic
         AudioHandler audioHandler = new AudioHandler();
         ButtonHandler buttonHandler = new ButtonHandler();
+        CharacterMovementHandler characterMovementHandler = new CharacterMovementHandler();
+        CharacterSelectionHandler characterSelectionHandler = new CharacterSelectionHandler();
         GameAssetsHandler gameAssetsHandler = new GameAssetsHandler();
+        ProcessedInputHandler processedInputHandler = new ProcessedInputHandler();
         TransitionHandler transitionHandler = new TransitionHandler();
         WheelMenuHandler wheelMenuHandler = new WheelMenuHandler();
         // Structure Initialization
@@ -48,10 +51,14 @@ public class MenuInitializer extends ZoneInitializer {
         // Logic
         audioHandler.initializeStructure(menuAssets);
         buttonHandler.initializeStructure(menuLogic, menuStuff);
+        characterMovementHandler.initializeStructure(menuStuff);
+        characterSelectionHandler.initializeStructure(menuScreen, menuStuff);
         gameAssetsHandler.initializeStructure(menuAssets, menuConnector);
+        processedInputHandler.initializeStructure(menuLogic, menuStuff);
         transitionHandler.initializeStructure(menuInput, menuLogic, menuStuff);
         wheelMenuHandler.initializeStructure(menuStuff);
-        menuLogic.initializeStructure(audioHandler, buttonHandler, gameAssetsHandler, transitionHandler, wheelMenuHandler);
+        menuLogic.initializeStructure(audioHandler, buttonHandler, characterMovementHandler, characterSelectionHandler,
+                gameAssetsHandler, processedInputHandler, transitionHandler, wheelMenuHandler);
 
         menuRenderer.initializeStructure(menuScreen, menuStuff);
         menuStuff.initializeStructure(menuAssets, menuScreen);

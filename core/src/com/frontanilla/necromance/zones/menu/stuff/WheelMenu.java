@@ -19,8 +19,8 @@ public class WheelMenu {
     // Logic
     private float rotation;
 
-    public WheelMenu(float x, float y, float r) {
-        bounds = new Circle(x, y, r);
+    public WheelMenu(float x, float y, float radius) {
+        bounds = new Circle(x, y, radius);
         planks = new RectangleButton[10];
         for (int i = 0; i < planks.length; i++) {
             planks[i] = new RectangleButton(0, 0, WHEEL_PLANK_WIDTH, WHEEL_PLANK_HEIGHT);
@@ -36,6 +36,7 @@ public class WheelMenu {
 
     public void renderDebug(ShapeRenderer shapeRenderer) {
         // The Circle
+        shapeRenderer.set(ShapeRenderer.ShapeType.Line);
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.circle(bounds.x, bounds.y, bounds.radius);
         // The Points Where Planks are Attached

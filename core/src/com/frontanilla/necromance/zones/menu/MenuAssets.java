@@ -14,6 +14,7 @@ public class MenuAssets extends ZoneAssets {
 
     private BitmapFont timesSquare;
     private TextureRegion background, plank, pixel;
+    private TextureRegion necromancerDoctor, necromancerHood;
     private Music medieval;
     // Pass to Menu Connector
     private GameAssets gameAssets;
@@ -27,6 +28,7 @@ public class MenuAssets extends ZoneAssets {
         assetManager = new AssetManager();
         assetManager.load(TIMES_SQUARE_FILE, BitmapFont.class);
         assetManager.load(MENU_ATLAS_FILE, Texture.class);
+        assetManager.load(CHARACTER_ATLAS_FILE, Texture.class);
         assetManager.load(MEDIEVAL_MUSIC_FILE, Music.class);
     }
 
@@ -38,6 +40,9 @@ public class MenuAssets extends ZoneAssets {
         plank = new TextureRegion(menuAtlas, 0, 1500, 400, 200);
         pixel = new TextureRegion(menuAtlas, 400, 1500, 1, 1);
         medieval = assetManager.get(MEDIEVAL_MUSIC_FILE, Music.class);
+        Texture characterAtlas = assetManager.get(CHARACTER_ATLAS_FILE, Texture.class);
+        necromancerDoctor = new TextureRegion(characterAtlas, 0, 0, 1369, 1748);
+        necromancerHood = new TextureRegion(characterAtlas, 1369, 0, 921, 1532);
     }
 
     // Getters
@@ -59,6 +64,14 @@ public class MenuAssets extends ZoneAssets {
 
     public Music getMedieval() {
         return medieval;
+    }
+
+    public TextureRegion getNecromancerDoctor() {
+        return necromancerDoctor;
+    }
+
+    public TextureRegion getNecromancerHood() {
+        return necromancerHood;
     }
 
     // Pass to Menu Connector

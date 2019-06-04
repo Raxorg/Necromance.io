@@ -13,7 +13,7 @@ public class GameAssets extends ZoneAssets {
     private BitmapFont timesSquare;
     private TextureRegion human;
     private TextureRegion playArea, frozenNinePatch, spawnPoint;
-    private TextureRegion necromancerDoctor;
+    private TextureRegion necromancerDoctor, necromancerHood;
 
     @Override
     public void queueAssetLoading() {
@@ -33,7 +33,8 @@ public class GameAssets extends ZoneAssets {
         frozenNinePatch = new TextureRegion(gameAtlas, 1024, 700, 64, 64);
         spawnPoint = new TextureRegion(gameAtlas, 1024, 0, 500, 500);
         Texture characterAtlas = assetManager.get(CHARACTER_ATLAS_FILE, Texture.class);
-        necromancerDoctor = new TextureRegion(characterAtlas);
+        necromancerDoctor = new TextureRegion(characterAtlas, 0, 0, 1369, 1748);
+        necromancerHood = new TextureRegion(characterAtlas, 1369, 0, 921, 1532);
     }
 
     public BitmapFont getTimesSquare() {
@@ -58,5 +59,9 @@ public class GameAssets extends ZoneAssets {
 
     public TextureRegion getNecromancerDoctor() {
         return necromancerDoctor;
+    }
+
+    public TextureRegion getNecromancerHood() {
+        return necromancerHood;
     }
 }

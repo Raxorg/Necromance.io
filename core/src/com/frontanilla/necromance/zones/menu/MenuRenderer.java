@@ -16,8 +16,9 @@ public class MenuRenderer extends ZoneRenderer {
     private SpriteBatch spriteBatch;
     private ShapeRenderer shapeRenderer;
 
-    public void initializeStructure(MenuScreen menuScreen,
-                                    MenuStuff menuStuff) {
+    public void initializeStructure(
+            MenuScreen menuScreen,
+            MenuStuff menuStuff) {
         this.menuScreen = menuScreen;
         this.menuStuff = menuStuff;
     }
@@ -31,22 +32,36 @@ public class MenuRenderer extends ZoneRenderer {
 
     @Override
     public void render() {
-        // Clear Previous Frame
+        // Clear previous frame / buffer
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        // Use the Camera
-        spriteBatch.setProjectionMatrix(menuScreen.getStaticCamera().combined);
-        shapeRenderer.setProjectionMatrix(menuScreen.getStaticCamera().combined);
-        // Render Static Stuff
+        // Render
+        renderStuff();
+        renderDebugStuff();
+    }
+
+    private void renderStuff() {
+        // Use the camera
+        spriteBatch.setProjectionMatrix(menuScreen.getCamera().combined);
+        // Render stuff
         spriteBatch.begin();
         menuStuff.getBackground().render(spriteBatch);
         menuStuff.getPlayButton().render(spriteBatch);
         menuStuff.getWheelMenu().render(spriteBatch);
+        menuStuff.getMenuCharacter().render(spriteBatch);
         menuStuff.getFader().render(spriteBatch);
         spriteBatch.end();
-        // Render Debug Static Stuff
+    }
+
+    private void renderDebugStuff() {
+        // Use the Camera
+        shapeRenderer.setProjectionMatrix(menuScreen.getCamera().combined);
+        // Render debug Stuff
         shapeRenderer.begin();
+        menuStuff.getLeftLimit().renderDebug(shapeRenderer);
+        menuStuff.getRightLimit().renderDebug(shapeRenderer);
         menuStuff.getWheelMenu().renderDebug(shapeRenderer);
+        menuStuff.getMenuCharacter().renderDebug(shapeRenderer);
         shapeRenderer.end();
     }
 }

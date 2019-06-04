@@ -29,11 +29,21 @@ public class BasicInputHandler extends InputAdapter {
     }
 
     @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (!menuInput.isEnabled() || pointer != 0) {
+            return false;
+        }
+        unprojected = menuScreen.getCamera().unproject(new Vector3(screenX, screenY, 0));
+        menuLogic.getProcessedInputHandler().touchDown(unprojected.x, unprojected.y);
+        return false;
+    }
+
+    @Override
     public boolean touchUp(int screenX, int screenY, int pointer, int button) {
         if (!menuInput.isEnabled() || pointer != 0) {
             return false;
         }
-        unprojected = menuScreen.getStaticCamera().unproject(new Vector3(screenX, screenY, 0));
+        unprojected = menuScreen.getCamera().unproject(new Vector3(screenX, screenY, 0));
         menuLogic.getButtonHandler().touchUp(unprojected.x, unprojected.y);
         return false;
     }
@@ -43,7 +53,7 @@ public class BasicInputHandler extends InputAdapter {
         if (!menuInput.isEnabled() || pointer != 0) {
             return false;
         }
-        unprojected = menuScreen.getStaticCamera().unproject(new Vector3(screenX, screenY, 0));
+        unprojected = menuScreen.getCamera().unproject(new Vector3(screenX, screenY, 0));
         menuLogic.getWheelMenuHandler().touchDragged(unprojected.x, unprojected.y);
         return false;
     }
